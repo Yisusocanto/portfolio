@@ -1,5 +1,6 @@
 ---
 import Button from "@/components/ui/Button.astro";
+import Link from "@/components/ui/Link.astro";
 ---
 
 <section class="">
@@ -18,30 +19,39 @@ import Button from "@/components/ui/Button.astro";
 			</div>
 			<div>
 				<h3 class="mb-2">REDES</h3>
-				<a
-					class="underline font-bold text-lg"
-					href="https://github.com/Yisusocanto">Github</a
-				>
-				<a
-					class="underline font-bold text-lg"
-					href="https://www.linkedin.com/in/jesus-ocanto">Linkedin</a
-				>
-				<a
-					class="underline font-bold text-lg"
-					href="https://www.instagram.com/yisus_daniel1984">Instagram</a
-				>
+				<div class="flex flex-col gap-4">
+					<Link target="_blank" href="https://github.com/Yisusocanto"
+						>Github</Link
+					>
+					<Link target="_blank" href="https://www.linkedin.com/in/jesus-ocanto"
+						>Linkedin</Link
+					>
+					<Link
+						target="_blank"
+						href="https://www.instagram.com/yisus_daniel1984">Instagram</Link
+					>
+				</div>
 			</div>
 		</div>
 		<div class="flex-2 items-center justify-center">
-			<form action="" class="flex flex-col gap-10">
+			<form
+				action="https://formspree.io/f/xwvzdeyr"
+				method="post"
+				class="flex flex-col gap-10"
+			>
 				<div class="flex justify-between gap-16">
 					<div class="flex flex-col w-full">
 						<label for="name">Nombre</label>
-						<input type="text" placeholder="Tu nombre" name="name" />
+						<input type="text" placeholder="Tu nombre" name="name" required />
 					</div>
 					<div class="flex flex-col w-full">
 						<label for="email">Email</label>
-						<input type="text" placeholder="email@gmail.com" name="email" />
+						<input
+							type="text"
+							placeholder="email@gmail.com"
+							name="email"
+							required
+						/>
 					</div>
 				</div>
 				<div class="flex flex-col">
@@ -49,14 +59,16 @@ import Button from "@/components/ui/Button.astro";
 					<input
 						type="text"
 						placeholder="En que puedo ayudarte?"
-						name="asunto"
+						name="subjet"
+						required
 					/>
 				</div>
 				<div class="flex flex-col">
 					<label for="name">Mensaje</label>
 					<textarea
 						placeholder="Cuentame sobre tu proyecto..."
-						name="mensaje"
+						name="message"
+						required
 						class="h-20"></textarea>
 				</div>
 				<Button variant="primary">Enviar mensaje</Button>

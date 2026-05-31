@@ -6,11 +6,12 @@ import Link from "@/components/ui/Link.astro";
 const links: LinkType[] = [
 	{ label: "Inicio", href: "/" },
 	{ label: "Proyectos", href: "/projects" },
+	{ label: "Contact", href: "/contact" },
 ];
 ---
 
 <nav
-	class="bg-primary/10 rounded-4xl p-6 w-full h-12 sm:w-fit flex items-center justify-between gap-2 sm:gap-4"
+	class="bg-primary/10 rounded-4xl p-6 w-full h-12 sm:w-fit flex items-center justify-between gap-2 sm:gap-4 mb-10"
 >
 	{links.map((link) => <Link href={link.href}>{link.label}</Link>)}
 	<ThemeToggle />
