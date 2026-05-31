@@ -1,0 +1,250 @@
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ── Semantic Colors ──
+     These adapt automatically to light/dark mode via CSS variables.
+     Use: bg-primary, text-primary, bg-surface, text-on-surface, etc. */
+  --color-primary: var(--semantic-primary);
+  --color-secondary: var(--semantic-secondary);
+  --color-surface: var(--semantic-bg-alt);
+  --color-inverse: var(--semantic-bg-inverse);
+  --color-on-surface: var(--semantic-text);
+  --color-on-inverse: var(--semantic-text-inverse);
+  --color-on-primary: var(--semantic-on-primary);
+  --color-accent: var(--semantic-accent);
+  --color-alert: var(--semantic-alert);
+
+  /* ── Fixed Palette (raw values, don't change with theme) ── */
+  --color-brand: #472425;
+  --color-cream: #fdfaf3;
+  --color-dark: #121212;
+  --color-danger: #e73737;
+
+  /* ── Typography — Font Families ── */
+  --font-sfuidisplay: "Inter", "SFUIDisplay", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-neuehaasdisplay: "Instrument Sans", "NeueHaasDisplay", ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-arial: "Arial", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* ── Typography — Scale ── */
+  --text-heading: 27px;
+  --leading-heading: 1;
+  --tracking-heading: -0.54px;
+  --text-display-lg: 130px;
+  --leading-display-lg: 0.80;
+  --tracking-display-lg: -3.375px;
+  --text-display: 180px;
+  --leading-display: 0.86;
+  --tracking-display: -4.7px;
+
+  /* ── NO custom --spacing-* variables ──
+     Tailwind v4 uses a dynamic scale: n × var(--spacing, 0.25rem)
+     So mb-20 = 5rem = 80px, gap-10 = 2.5rem = 40px, etc.
+     Defining --spacing-N overrides this and breaks the scale. */
+}
+
+/* ============================================================
+   SEMANTIC COLOR VALUES — Light & Dark Modes
+   These CSS custom properties feed the @theme colors above
+   so Tailwind utilities (bg-primary, bg-surface, etc.)
+   automatically adapt to the active theme.
+   ============================================================ */
+
+:root {
+  /* ── Font Weights ── */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+
+  /* ── Light mode (default) ── */
+  --semantic-primary: #472425;
+  --semantic-secondary: #121212;
+  --semantic-bg: #fdfaf3;
+  --semantic-bg-alt: #ffffff;
+  --semantic-bg-inverse: #000000;
+  --semantic-text: #472425;
+  --semantic-text-secondary: #121212;
+  --semantic-text-inverse: #ffffff;
+  --semantic-border: #472425;
+  --semantic-border-subtle: #472425;
+  --semantic-on-primary: #ffffff;
+  --semantic-accent: #472425;
+  --semantic-alert: #e73737;
+
+  color-scheme: light dark;
+}
+
+/* ── Dark Mode — via class toggle ── */
+.dark {
+  --semantic-primary: #fdfaf3;
+  --semantic-secondary: rgba(255, 255, 255, 0.7);
+  --semantic-bg: #121212;
+  --semantic-bg-alt: #1a1a1a;
+  --semantic-bg-inverse: #fdfaf3;
+  --semantic-text: #fdfaf3;
+  --semantic-text-secondary: rgba(255, 255, 255, 0.7);
+  --semantic-text-inverse: #472425;
+  --semantic-border: rgba(255, 255, 255, 0.7);
+  --semantic-border-subtle: rgba(255, 255, 255, 0.3);
+  --semantic-on-primary: #472425;
+  --semantic-accent: #fdfaf3;
+  --semantic-alert: #e73737;
+}
+
+/* ── Dark Mode — via OS preference ── */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --semantic-primary: #fdfaf3;
+    --semantic-secondary: rgba(255, 255, 255, 0.7);
+    --semantic-bg: #121212;
+    --semantic-bg-alt: #1a1a1a;
+    --semantic-bg-inverse: #fdfaf3;
+    --semantic-text: #fdfaf3;
+    --semantic-text-secondary: rgba(255, 255, 255, 0.7);
+    --semantic-text-inverse: #472425;
+    --semantic-border: rgba(255, 255, 255, 0.7);
+    --semantic-border-subtle: rgba(255, 255, 255, 0.3);
+    --semantic-on-primary: #472425;
+    --semantic-accent: #fdfaf3;
+    --semantic-alert: #e73737;
+  }
+}
+
+/* ============================================================
+   BASE STYLES — inside @layer base so Tailwind utilities win
+   ============================================================ */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sfuidisplay);
+    font-weight: var(--font-weight-regular);
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--semantic-text);
+    background-color: var(--semantic-bg);
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  /* ── Headings ── */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-neuehaasdisplay);
+    font-weight: var(--font-weight-regular);
+    color: var(--semantic-text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  /* ── Links ── */
+
+  a:hover {
+    opacity: 0.75;
+  }
+
+  /* ── Inputs ── */
+  input,
+  textarea {
+    font-family: var(--font-sfuidisplay);
+    font-size: 12px;
+    color: var(--semantic-text);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--semantic-border);
+    border-radius: 0px;
+    padding: 3px 75px 5px 0;
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--semantic-text-secondary);
+    opacity: 0.7;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-bottom-color: var(--semantic-accent);
+  }
+
+  /* ── Images ── */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* ── Selection ── */
+  ::selection {
+    background-color: #472425;
+    color: #fdfaf3;
+  }
+
+  .dark ::selection {
+    background-color: #fdfaf3;
+    color: #472425;
+  }
+
+  
+}
+
+/* ============================================================
+   TYPOGRAPHY HELPERS — inside @layer components
+   ============================================================ */
+
+@layer components {
+  /* ── Display typography helpers ── */
+  .text-display {
+    font-family: var(--font-neuehaasdisplay);
+    font-size: var(--text-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-display-lg {
+    font-family: var(--font-neuehaasdisplay);
+    font-size: var(--text-display-lg);
+    line-height: var(--leading-display-lg);
+    letter-spacing: var(--tracking-display-lg);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-heading {
+    font-family: var(--font-neuehaasdisplay);
+    font-size: var(--text-heading);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    font-weight: var(--font-weight-regular);
+  }
+}

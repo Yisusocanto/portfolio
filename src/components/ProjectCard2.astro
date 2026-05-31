@@ -1,0 +1,69 @@
+---
+import Chip from "@/components/ui/Chip.astro";
+import Link from "@/components/ui/Link.astro";
+import Image from "astro/components/Image.astro";
+
+interface Props {
+	title: string;
+	number: number;
+	techs: string[];
+	github?: string;
+	description: string;
+	imageUrl: string;
+	slug: string;
+	live?: string;
+}
+
+const { number, github, imageUrl, techs, title, description, slug, live } =
+	Astro.props;
+---
+
+<section class="group">
+	<a
+		href={`/projects/${slug}`}
+		class="overflow-hidden border border-secondary/10 mb-6"
+	>
+		<Image
+			src={imageUrl}
+			alt={`Imagen de ${title}`}
+			width={1200}
+			height={480}
+			class="w-full h-48 sm:h-64 md:h-80 lg:h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+		/>
+	</a>
+	<div class="flex flex-col md:flex-row justify-between gap-6">
+		<div class="flex flex-col gap-2 text-start flex-1">
+			<span class="text-xs uppercase tracking-widest text-secondary/70">
+				{number.toString().padStart(2, "0")} — Open source
+			</span>
+			<h3 class="text-3xl text-accent font-bold uppercase">
+				{title}
+			</h3>
+			<p class="text-secondary/80 mt-2 max-w-2xl text-sm leading-relaxed">
+				{description}
+			</p>
+		</div>
+		<div
+			class="flex flex-col justify-between items-end gap-6 md:min-w-[250px] text-right"
+		>
+			<div class="flex flex-wrap gap-2 justify-end">
+				{
+					techs.map((tech) => (
+						<Chip icon={tech.replace(" ", "").toLowerCase()}>{tech}</Chip>
+					))
+				}
+			</div>
+			<div class="flex gap-6 items-center">
+				{
+					github && (
+						<Link target="_blank" href={github}>
+							Github
+						</Link>
+					)
+				}
+				<Link href={`/projects/${slug}`}>Ver detalles</Link>
+				{live && <Link href={live}>Live</Link>}
+			</div>
+		</div>
+	</div>
+</section>

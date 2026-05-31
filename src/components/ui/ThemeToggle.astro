@@ -1,0 +1,36 @@
+---
+import Button from "@/components/ui/Button.astro";
+import { Moon, Sun } from "@lucide/astro";
+---
+
+<Button id="theme-toggle" variant="ghost">
+	<Moon class="dark:hidden" />
+	<Sun class="hidden dark:inline" />
+</Button>
+
+<script>
+	const button = document.getElementById("theme-toggle");
+	const html = document.documentElement;
+
+	button?.addEventListener("click", () => {
+		const isDark = html.classList.contains("dark");
+
+		if (isDark) {
+			html.classList.remove("dark");
+			html.classList.add("light");
+			localStorage.theme = "light";
+		} else {
+			html.classList.remove("light");
+			html.classList.add("dark");
+			localStorage.theme = "dark";
+		}
+	});
+
+	if (localStorage.theme === "dark") {
+		html.classList.remove("light");
+		html.classList.add("dark");
+	} else {
+		html.classList.remove("dark");
+		html.classList.add("light");
+	}
+</script>

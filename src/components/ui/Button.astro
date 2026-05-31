@@ -1,0 +1,22 @@
+---
+interface Props {
+	variant?: "primary" | "ghost" | "outline";
+	id?: string;
+}
+
+const { variant = "primary", id } = Astro.props;
+---
+
+<button
+	class:list={[
+		"p-2 hover:cursor-pointer",
+		{
+			"bg-primary text-on-primary hover:bg-primary/90": variant === "primary",
+			"hover:bg-primary hover:text-on-primary border": variant === "outline",
+			"bg-transparent border": variant == "ghost",
+		},
+	]}
+	id={id}
+>
+	<slot />
+</button>

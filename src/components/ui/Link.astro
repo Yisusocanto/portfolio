@@ -1,0 +1,15 @@
+---
+interface Props {
+	href: string;
+	target?: "_self" | "_blank";
+}
+
+const { href, target = "_self" } = Astro.props;
+---
+
+<a
+	href={href}
+	target={target}
+	class="uppercase font-semibold underline underline-offset-4 decoration-dotted"
+	><slot /></a
+>

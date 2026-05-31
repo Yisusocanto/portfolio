@@ -1,0 +1,42 @@
+---
+import ProjectCard2 from "@/components/ProjectCard2.astro";
+import Separator from "@/components/ui/Separator.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import Link from "@/components/ui/Link.astro";
+
+const projects = await getCollection("projects");
+---
+
+<Layout title="Projects" description="Lista de los proyectos mas destacados">
+	<main class="flex flex-col gap-20 mt-10">
+		<div>
+			<h1 class="text-6xl font-bold md:text-display-lg mb-4"
+				>PROYECTOS <br /> Y <br /> EXPERIENCIAS</h1
+			>
+			<Separator />
+		</div>
+		<div class="flex flex-col gap-16">
+			{
+				projects.map((project, i) => (
+					<ProjectCard2
+						title={project.data.title}
+						number={i + 1}
+						techs={project.data.techs}
+						github={project.data.github}
+						description={project.data.description}
+						imageUrl={project.data.imageUrl}
+						slug={project.id}
+					/>
+				))
+			}
+		</div>
+		<Separator />
+		<div class="flex flex-col gap-8 text-center">
+			<span>Tienes un proyecto?</span>
+			<h4 class="text-display-lg font-bold">Trabajemos juntos</h4>
+			<Link href={"/contact"}>Contacto</Link>
+		</div>
+		<Separator />
+	</main>
+</Layout>
