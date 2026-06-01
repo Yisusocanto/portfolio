@@ -1,0 +1,109 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import MiPhoto from "@/assets/mi-foto.jpg";
+import Separator from "@/components/ui/Separator.astro";
+---
+
+<Layout title="About me" description="Conoce quien soy y mi valores.">
+	<main class="flex flex-col gap-12 px-6 sm:px-0 mb-20">
+		<section
+			class="flex flex-col md:flex-row gap-10 md:gap-20 items-center md:items-start pt-10">
+			<div class="flex-2 order-2 md:order-1 w-full">
+				<h1
+					class="text-7xl md:text-8xl lg:text-display leading-none mb-4 tracking-tighter uppercase">
+					JESUS <br /> OCANTO
+				</h1>
+				<h2
+					class="text-4xl md:text-6xl lg:text-display-lg text-primary opacity-80 mb-10 uppercase">
+					Quien soy?
+				</h2>
+
+				<div
+					class="flex flex-col gap-6 text-xl sm:text-2xl leading-relaxed max-w-2xl font-light">
+					<p>
+						¡Hola! Soy <strong class="font-bold text-primary"
+							>Jesús Ocanto</strong
+						>, un Desarrollador Full Stack apasionado por construir aplicaciones
+						web que no solo funcionen a la perfección, sino que se sientan
+						increíbles al usarlas.
+					</p>
+					<p>
+						Me especializo en manejar todo el ciclo de vida de un producto:
+						desde diseñar una base de datos robusta y rápida en el backend,
+						hasta pulir el último detalle visual en el frontend para que sea
+						totalmente responsive.
+					</p>
+				</div>
+			</div>
+
+			<div
+				class="flex-1 order-1 md:order-2 w-full max-w-[280px] sm:max-w-[350px] md:max-w-[450px] py-6 md:py-10">
+				<div class="relative group">
+					<div
+						class="absolute inset-0 bg-primary/10 rounded-[60px] translate-x-6 translate-y-6 transition-transform duration-500 group-hover:translate-x-4 group-hover:translate-y-4">
+					</div>
+					<div
+						class="absolute inset-0 border-2 border-primary/20 rounded-[60px] -translate-x-4 -translate-y-4 transition-transform duration-500 group-hover:-translate-x-2 group-hover:-translate-y-2">
+					</div>
+
+					<div
+						class="relative overflow-hidden rounded-[50px] aspect-4/5 shadow-2xl">
+						<Image
+							src={MiPhoto}
+							alt="Jesús Ocanto"
+							class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
+						/>
+						<div
+							class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500"
+						></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="mt-20">
+			<h2
+				class="text-heading font-bold uppercase tracking-[0.2em] mb-4 text-primary/60">
+				Filosofía y Stack
+			</h2>
+			<Separator />
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
+				<div class="space-y-4">
+					<p class="text-2xl leading-tight font-medium text-primary">
+						El código debe ser limpio, escalable y resolver problemas reales.
+					</p>
+					<p class="text-lg leading-relaxed opacity-80">
+						Me encanta la velocidad y la modularidad, por lo que mi stack de
+						confianza incluye herramientas modernas como <strong
+							>React, Next.js y Astro</strong
+						> para crear interfaces brutales y optimizadas.
+					</p>
+				</div>
+				<div class="space-y-4">
+					<p class="text-lg leading-relaxed opacity-80">
+						Utilizo <strong>Tailwind CSS</strong> para el diseño, combinada con la
+						potencia y el orden de <strong>FastAPI y SQLModel</strong> en el backend.
+						No le huyo a la lógica pesada; al contrario, me motiva estructurar arquitecturas
+						limpias que agilicen los procesos de desarrollo.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section
+			class="relative overflow-hidden bg-primary text-on-primary p-10 sm:p-20 rounded-[60px] mt-20">
+			<h2
+				class="text-4xl md:text-5xl text-on-primary font-bold mb-10 tracking-tight">
+				¿Quién soy cuando no escribo código?
+			</h2>
+			<p
+				class="text-xl md:text-3xl leading-snug opacity-90 font-light italic text-balance">
+				"Cuando no estoy metido en un bucle de código o peleando con una API,
+				seguro me encuentras analizando la narrativa de algún videojuego de
+				mundo abierto, escuchando música con la mayor fidelidad de audio
+				posible, o tomándome un buen café en algún lugar cool de la ciudad."
+			</p>
+		</section>
+	</main>
+</Layout>

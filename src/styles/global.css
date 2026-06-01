@@ -219,11 +219,10 @@
 }
 
 /* ============================================================
-   TYPOGRAPHY HELPERS — inside @layer components
+   TYPOGRAPHY HELPERS — as utilities for responsiveness
    ============================================================ */
 
-@layer components {
-  /* ── Display typography helpers ── */
+@layer utilities {
   .text-display {
     font-family: var(--font-neuehaasdisplay);
     font-size: var(--text-display);

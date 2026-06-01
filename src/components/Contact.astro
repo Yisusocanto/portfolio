@@ -3,22 +3,29 @@ import Button from "@/components/ui/Button.astro";
 import Link from "@/components/ui/Link.astro";
 ---
 
-<section class="">
-	<h1 class="text-display-lg mb-15">CONTACTO</h1>
-	<div class="flex flex-col md:flex-row justify-between gap-20">
-		<div class="flex flex-1 flex-col gap-10">
+<section class="w-full">
+	<h1
+		class="text-7xl md:text-8xl lg:text-display-lg mb-12 tracking-tighter uppercase"
+		>CONTACT</h1
+	>
+	<div class="flex flex-col lg:flex-row justify-between gap-16 lg:gap-32">
+		<div class="flex flex-1 flex-col gap-12">
 			<div>
-				<h3 class="mb-2">DISPONIBILIDAD</h3>
-				<p class="font-bold text-lg"
-					>Abierto a nuevos proyectos y colaboraciones remotas</p
+				<h3 class="text-xs uppercase tracking-widest opacity-60 mb-3"
+					>Availability</h3
+				>
+				<p class="text-2xl font-medium leading-tight"
+					>Open to new projects and remote collaborations</p
 				>
 			</div>
 			<div>
-				<h3 class="mb-2">EMAIL</h3>
-				<p class="font-bold text-lg">yisusocanto1984@gmail.com</p>
+				<h3 class="text-xs uppercase tracking-widest opacity-60 mb-3">Email</h3>
+				<p class="text-2xl font-medium break-all">yisusocanto1984@gmail.com</p>
 			</div>
 			<div>
-				<h3 class="mb-2">REDES</h3>
+				<h3 class="text-xs uppercase tracking-widest opacity-60 mb-3"
+					>Socials</h3
+				>
 				<div class="flex flex-col gap-4">
 					<Link target="_blank" href="https://github.com/Yisusocanto"
 						>Github</Link
@@ -33,45 +40,66 @@ import Link from "@/components/ui/Link.astro";
 				</div>
 			</div>
 		</div>
-		<div class="flex-2 items-center justify-center">
+		<div class="flex-2 w-full">
 			<form
 				action="https://formspree.io/f/xwvzdeyr"
 				method="post"
-				class="flex flex-col gap-10"
-			>
-				<div class="flex justify-between gap-16">
-					<div class="flex flex-col w-full">
-						<label for="name">Nombre</label>
-						<input type="text" placeholder="Tu nombre" name="name" required />
-					</div>
-					<div class="flex flex-col w-full">
-						<label for="email">Email</label>
+				class="flex flex-col gap-10">
+				<div class="flex flex-col sm:flex-row justify-between gap-10">
+					<div class="flex flex-col w-full gap-2">
+						<label
+							for="name"
+							class="text-xs uppercase tracking-widest opacity-60">Name</label
+						>
 						<input
 							type="text"
-							placeholder="email@gmail.com"
+							placeholder="Your name"
+							name="name"
+							required
+							class="w-full"
+						/>
+					</div>
+					<div class="flex flex-col w-full gap-2">
+						<label
+							for="email"
+							class="text-xs uppercase tracking-widest opacity-60">Email</label
+						>
+						<input
+							type="email"
+							placeholder="email@example.com"
 							name="email"
 							required
+							class="w-full"
 						/>
 					</div>
 				</div>
-				<div class="flex flex-col">
-					<label for="name">Asunto</label>
+				<div class="flex flex-col gap-2">
+					<label
+						for="subject"
+						class="text-xs uppercase tracking-widest opacity-60">Subject</label
+					>
 					<input
 						type="text"
-						placeholder="En que puedo ayudarte?"
-						name="subjet"
+						placeholder="How can I help you?"
+						name="subject"
 						required
+						class="w-full"
 					/>
 				</div>
-				<div class="flex flex-col">
-					<label for="name">Mensaje</label>
+				<div class="flex flex-col gap-2">
+					<label
+						for="message"
+						class="text-xs uppercase tracking-widest opacity-60">Message</label
+					>
 					<textarea
-						placeholder="Cuentame sobre tu proyecto..."
+						placeholder="Tell me about your project..."
 						name="message"
 						required
-						class="h-20"></textarea>
+						class="h-32 w-full resize-none"></textarea>
 				</div>
-				<Button variant="primary">Enviar mensaje</Button>
+				<div class="pt-4">
+					<Button variant="primary">Send Message</Button>
+				</div>
 			</form>
 		</div>
 	</div>
