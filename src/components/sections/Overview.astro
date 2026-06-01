@@ -14,7 +14,8 @@ const stacks = [
 ];
 ---
 
-<section class="flex flex-col lg:flex-row gap-12 lg:gap-20 justify-between items-center px-6 lg:px-0">
+<section
+	class="flex flex-col lg:flex-row gap-12 lg:gap-20 justify-between items-center px-6 lg:px-0">
 	<div class="w-full max-w-[400px] lg:max-w-none lg:flex-1">
 		<Image
 			alt="Imagen de perfil de Jesus"
@@ -26,6 +27,7 @@ const stacks = [
 	</div>
 	<div class="flex flex-col gap-6 lg:flex-2">
 		<h3 class="text-2xl font-bold">OVERVIEW</h3>
+		<Separator />
 		<p
 			>Mi enfoque técnico se basa en la eliminación de la complejidad
 			innecesaria. Trato cada línea de código como un elemento estructural,
@@ -35,13 +37,5 @@ const stacks = [
 			>Construyo sistemas que escalan, interfaces que no estorban y soluciones
 			que resuelven problemas reales con elegancia matemática.</p
 		>
-		<Separator />
-		<div>
-			<h3 class="text-2xl font-bold mb-6">SKILLS</h3>
-			<div class="flex flex-wrap gap-5">
-				{stacks.map((stack) => <Chip>{stack}</Chip>)}
-			</div>
-		</div>
-		<Separator />
 	</div>
 </section>

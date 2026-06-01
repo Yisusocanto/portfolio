@@ -1,0 +1,49 @@
+---
+import Chip from "@/components/ui/Chip.astro";
+import Separator from "@/components/ui/Separator.astro";
+
+const frontend = ["Next js", "React", "Astro", "TypeScript", "TailwindCSS"];
+
+const backend = ["FastAPI", "Flask", "PostgreSQL"];
+
+const infra = ["Docker"];
+---
+
+<section class="w-full">
+	<h1
+		class="text-7xl md:text-8xl lg:text-display-lg tracking-widest uppercase mb-12"
+		>SKILLS</h1
+	>
+	<div class="flex flex-col sm:flex-row justify-between gap-6">
+		<div class="flex-1 border-r-2 border-r-primary/40">
+			<h3 class="text-2xl font-bold uppercase mb-4">Frontend</h3>
+			<div class="flex flex-col gap-4">
+				{
+					frontend.map((skill) => (
+						<Chip icon={skill.replace(" ", "").toLowerCase()}>{skill}</Chip>
+					))
+				}
+			</div>
+		</div>
+		<div class="flex-1 border-r-2 border-r-primary/40">
+			<h3 class="text-2xl font-bold uppercase mb-4">Backend</h3>
+			<div class="flex flex-col gap-4">
+				{
+					backend.map((skill) => (
+						<Chip icon={skill.replace(" ", "").toLowerCase()}>{skill}</Chip>
+					))
+				}
+			</div>
+		</div>
+		<div class="flex-1">
+			<h3 class="text-2xl font-bold uppercase mb-4">Infrastructure</h3>
+			<div class="flex flex-col gap-4">
+				{
+					infra.map((skill) => (
+						<Chip icon={skill.replace(" ", "").toLowerCase()}>{skill}</Chip>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
