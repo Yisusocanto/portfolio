@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import Separator from "@/components/ui/Separator.astro";
 import Link from "@/components/ui/Link.astro";
 import Button from "@/components/ui/Button.astro";
+import Chip from "@/components/ui/Chip.astro";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
@@ -20,13 +21,15 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 ---
 
-<Layout 
-	title={`${project.data.title} | Jesús Ocanto`} 
-	description={project.data.description}
->
+<Layout
+	title={`${project.data.title} | Jesús Ocanto`}
+	description={project.data.description}>
 	<main class="w-full mt-10 px-6 sm:px-0 mb-32 flex flex-col gap-12 sm:gap-16">
 		<nav class="flex items-center">
-			<Link href="/projects" variant="none" class="text-xs uppercase tracking-widest text-primary hover:opacity-75 font-semibold transition-opacity flex items-center gap-2">
+			<Link
+				href="/projects"
+				variant="none"
+				class="text-xs uppercase tracking-widest text-primary hover:opacity-75 font-semibold transition-opacity flex items-center gap-2">
 				← Back to Projects
 			</Link>
 		</nav>
@@ -34,11 +37,12 @@ const { Content } = await render(project);
 		<header class="flex flex-col gap-8">
 			<div class="flex flex-col gap-3">
 				<div class="flex items-center gap-3">
-					<span class="text-xs font-semibold uppercase tracking-widest bg-primary/10 text-primary px-3 py-1 border border-primary/20">
+					<Chip>
 						{project.data.type}
-					</span>
+					</Chip>
 				</div>
-				<h1 class="text-4xl sm:text-7xl md:text-[80px] lg:text-[100px] font-normal uppercase leading-none tracking-tighter text-primary font-neuehaasdisplay">
+				<h1
+					class="text-4xl sm:text-7xl md:text-[80px] lg:text-[100px] font-normal uppercase leading-none tracking-tighter text-primary font-neuehaasdisplay">
 					{project.data.title}
 				</h1>
 			</div>
@@ -47,57 +51,79 @@ const { Content } = await render(project);
 
 			<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
 				<div class="lg:col-span-7 flex flex-col gap-6">
-					<h2 class="text-xs uppercase tracking-widest text-secondary/50 font-semibold">Overview</h2>
-					<p class="text-xl sm:text-2xl font-light leading-relaxed text-secondary/90 font-sfuidisplay">
+					<h2
+						class="text-xs uppercase tracking-widest text-secondary/50 font-semibold"
+						>Overview</h2
+					>
+					<p
+						class="text-xl sm:text-2xl font-light leading-relaxed text-secondary/90 font-sfuidisplay">
 						{project.data.description}
 					</p>
 				</div>
 
-				<div class="lg:col-span-5 flex flex-col justify-between gap-8 border-l-0 lg:border-l border-secondary/15 lg:pl-10">
+				<div
+					class="lg:col-span-5 flex flex-col justify-between gap-8 border-l-0 lg:border-l border-secondary/15 lg:pl-10">
 					<div class="flex flex-col gap-6">
 						<div class="flex flex-col gap-2">
-							<span class="text-xs uppercase tracking-widest text-secondary/50 font-semibold">Technologies</span>
+							<span
+								class="text-xs uppercase tracking-widest text-secondary/50 font-semibold"
+								>Technologies</span
+							>
 							<div class="flex flex-wrap gap-2">
-								{project.data.techs.map((tech) => (
-									<span class="px-2.5 py-1 bg-secondary/5 text-secondary border border-secondary/20 text-xs uppercase font-medium tracking-wide">
-										{tech}
-									</span>
-								))}
+								{project.data.techs.map((tech) => <Chip>{tech}</Chip>)}
 							</div>
 						</div>
 
 						<div class="grid grid-cols-2 gap-4">
 							<div class="flex flex-col gap-1">
-								<span class="text-xs uppercase tracking-widest text-secondary/50 font-semibold">Role</span>
+								<span
+									class="text-xs uppercase tracking-widest text-secondary/50 font-semibold"
+									>Role</span
+								>
 								<span class="text-sm font-medium">Full-Stack Developer</span>
 							</div>
 							<div class="flex flex-col gap-1">
-								<span class="text-xs uppercase tracking-widest text-secondary/50 font-semibold">Year</span>
+								<span
+									class="text-xs uppercase tracking-widest text-secondary/50 font-semibold"
+									>Year</span
+								>
 								<span class="text-sm font-medium">2026</span>
 							</div>
 						</div>
 					</div>
 
 					<div class="flex gap-4 items-center">
-						{project.data.github && (
-							<Button href={project.data.github} target="_blank" class="flex-1" variant="primary">
-								GitHub Repo
-							</Button>
-						)}
-						{project.data.live && (
-							<Button href={project.data.live} target="_blank" class="flex-1" variant="outline">
-								Live Site
-							</Button>
-						)}
+						{
+							project.data.github && (
+								<Button
+									href={project.data.github}
+									target="_blank"
+									class="flex-1"
+									variant="primary">
+									GitHub Repo
+								</Button>
+							)
+						}
+						{
+							project.data.live && (
+								<Button
+									href={project.data.live}
+									target="_blank"
+									class="flex-1"
+									variant="outline">
+									Live Site
+								</Button>
+							)
+						}
 					</div>
 				</div>
 			</div>
 		</header>
 
 		<div class="w-full border border-secondary/15 overflow-hidden">
-			<Image 
-				src={project.data.imageUrl} 
-				alt={`Mockup principal de ${project.data.title}`} 
+			<Image
+				src={project.data.imageUrl}
+				alt={`Mockup principal de ${project.data.title}`}
 				class="w-full object-cover aspect-16/10 md:aspect-21/9"
 			/>
 		</div>
@@ -105,16 +131,32 @@ const { Content } = await render(project);
 		<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mt-6">
 			<aside class="hidden lg:block lg:col-span-3">
 				<div class="sticky top-24 flex flex-col gap-4">
-					<span class="text-xs uppercase tracking-widest text-secondary/40 font-bold mb-2">Content</span>
-					<ul class="flex flex-col gap-3 text-xs uppercase tracking-wider font-semibold">
+					<span
+						class="text-xs uppercase tracking-widest text-secondary/40 font-bold mb-2"
+						>Content</span
+					>
+					<ul
+						class="flex flex-col gap-3 text-xs uppercase tracking-wider font-semibold">
 						<li>
-							<a href="#the-problem" class="text-secondary/60 hover:text-primary transition-colors">01. The Problem</a>
+							<a
+								href="#the-problem"
+								class="text-secondary/60 hover:text-primary transition-colors"
+								>01. The Problem</a
+							>
 						</li>
 						<li>
-							<a href="#the-solution" class="text-secondary/60 hover:text-primary transition-colors">02. The Solution</a>
+							<a
+								href="#the-solution"
+								class="text-secondary/60 hover:text-primary transition-colors"
+								>02. The Solution</a
+							>
 						</li>
 						<li>
-							<a href="#technical-challenges" class="text-secondary/60 hover:text-primary transition-colors">03. Challenges</a>
+							<a
+								href="#technical-challenges"
+								class="text-secondary/60 hover:text-primary transition-colors"
+								>03. Challenges</a
+							>
 						</li>
 					</ul>
 				</div>
