@@ -246,4 +246,15 @@
     letter-spacing: var(--tracking-heading);
     font-weight: var(--font-weight-regular);
   }
+
+  .button-link {
+    padding: 8px;
+    background-color: var(--color-accent);
+    color: var(--color-on-primary);
+    text-decoration: none;
+  }
+
+  .button:hover {
+    opacity: 10;
+  }
 }

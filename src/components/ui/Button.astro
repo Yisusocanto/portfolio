@@ -1,22 +1,29 @@
 ---
 interface Props {
-	variant?: "primary" | "ghost" | "outline";
+	href?: string;
+	variant?: "primary" | "outline" | "ghost";
 	id?: string;
+	target?: "_self" | "_blank";
+	class?: string;
 }
 
-const { variant = "primary", id } = Astro.props;
+const { href, variant = "primary", id, target = "_self", class: className = "" } = Astro.props;
+const Element = href ? "a" : "button";
 ---
 
-<button
-	class:list={[
-		"p-2 hover:cursor-pointer",
-		{
-			"bg-primary text-on-primary hover:bg-primary/90": variant === "primary",
-			"hover:bg-primary hover:text-on-primary border": variant === "outline",
-			"bg-transparent border": variant == "ghost",
-		},
-	]}
+<Element
+	href={href}
+	target={target}
 	id={id}
+	class:list={[
+		"p-3 text-xs uppercase tracking-widest font-semibold text-center transition-all duration-300 hover:cursor-pointer inline-block",
+		{
+			"bg-primary text-on-primary border border-primary hover:bg-transparent hover:text-primary": variant === "primary",
+			"border border-primary text-primary hover:bg-primary hover:text-on-primary": variant === "outline",
+			"bg-transparent text-primary hover:opacity-70": variant === "ghost",
+		},
+		className,
+	]}
 >
 	<slot />
-</button>
+</Element>

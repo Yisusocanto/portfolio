@@ -2,14 +2,20 @@
 interface Props {
 	href: string;
 	target?: "_self" | "_blank";
+	class?: string;
+	variant?: "default" | "none";
 }
 
-const { href, target = "_self" } = Astro.props;
+const { href, target = "_self", class: className = "", variant = "default" } = Astro.props;
 ---
 
 <a
 	href={href}
 	target={target}
-	class="uppercase font-semibold underline underline-offset-4 decoration-dotted"
-	><slot /></a
->
+	class:list={[
+		{
+			"uppercase font-semibold underline underline-offset-4 decoration-dotted": variant === "default",
+		},
+		className,
+	]}
+><slot /></a>

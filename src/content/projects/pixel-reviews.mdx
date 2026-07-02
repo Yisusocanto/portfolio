@@ -1,41 +1,41 @@
 ---
 title: "Pixel Reviews"
-description: "Mi granb primer proyecto"
+description: "A social and review platform for video games, inspired by Letterboxd. Discover titles, write detailed reviews, rate games, keep a log of what you've played, and connect with other gamers in a clean and direct environment."
 github: "https://github.com/Yisusocanto/pixel_reviews"
 live: "https://pixel-reviews-livid.vercel.app"
 techs: ["Next js", "Flask", "Postgresql", "React", "Tailwindcss"]
-imageUrl: "https://edap.es/wp-content/uploads/blog9-img-01.jpg"
+imageUrl: "../../assets/pixel-reviews-home.png"
 type: "Full Stack"
-
 ---
 
-import Separator from "@/components/ui/Separator.astro"
-import {Image} from "astro:assets"
-import MiFoto from "@/assets/mi-foto.jpg"
+import { Image } from "astro:assets"
+import GameDetailsMockup from "@/assets/pixel-reviews-game-details.png"
+import FeedMockup from "@/assets/pixel-reviews-feed.png"
 
-# PIXEL REVIEWS
+A website focused on the video game community, structured to offer the best experience for rating, reviewing, and organizing your gaming log without distractions.
 
-Sitio web enfocado en contenido de videojuegos, incluyendo reviews, rating y comentarios.
+<Image src={GameDetailsMockup} alt="Pixel Reviews Dashboard Mockup" />
 
-<Separator/>
+<div id="the-problem">
+## THE PROBLEM
+</div>
 
-<Image src={MiFoto} with={400} height={400} alt="Mi foto"/>
+For video game enthusiasts, there was no minimalist, community-focused platform in the style of Letterboxd (for movies) or Goodreads (for books). Existing alternatives are usually ad-saturated news portals or digital storefronts (like Steam) where reviews get lost among memes and performance complaints. The challenge lay in designing a space dedicated purely to logging game activity, cataloging titles, and fostering honest review sharing.
 
-## EL PROBLEMA
-<Separator/>
+<div id="the-solution">
+## THE SOLUTION
+</div>
 
-Siempre me han interesado los videojuegos y saber las distintas opiniones que hya sobre ellos, al buscar sitios web parecidos a Letterbox pero enfocado en contenido de videojuegos me encontre con que no habian tantos, y el contenido no estaba tanto como deseaba, asi que decidi hacer uno con las caracteristicas que tanto queria.
+Pixel Reviews solves this by providing a modern, clean, and content-centric interface. Users can search for video games using the IGDB database, mark them as played, add them to their wishlist, assign a rating, and write a review. A monthly log was implemented to view gaming history, along with a profile system showcasing user gaming stats (total games, average rating, favorite genre).
 
-<Image src={MiFoto} with={400} height={400} alt="Mi foto"/>
+<Image src={FeedMockup} alt="Pixel Reviews Game Details & Writing Review UI Mockup" />
 
-## LA SOLUCION
-<Separator/>
+<div id="technical-challenges">
+## TECHNICAL CHALLENGES
+</div>
 
-Siempre me han interesado los videojuegos y saber las distintas opiniones que hya sobre ellos, al buscar sitios web parecidos a Letterbox pero enfocado en contenido de videojuegos me encontre con que no habian tantos, y el contenido no estaba tanto como deseaba, asi que decidi hacer uno con las caracteristicas que tanto queria.
+Several significant challenges were faced during the development of this Full-Stack application:
 
-<Image src={MiFoto} with={400} height={400} alt="Mi foto"/>
-
-## DESAFIOS TECNICOS
-<Separator/>
-
-Siempre me han interesado los videojuegos y saber las distintas opiniones que hya sobre ellos, al buscar sitios web parecidos a Letterbox pero enfocado en contenido de videojuegos me encontre con que no habian tantos, y el contenido no estaba tanto como deseaba, asi que decidi hacer uno con las caracteristicas que tanto queria.
+- **IGDB API Synchronization**: Consuming video game data in real time required configuring a cache layer in PostgreSQL and handling external API rate limits to prevent bottlenecks when loading the catalog.
+- **Real-Time Average Calculation**: Computing average ratings from thousands of users and generating star distribution histograms required optimizing relational queries using SQL indexing and aggregation via SQLAlchemy in Flask.
+- **Interactive User Experience**: To make logging a game instantaneous, a global state synchronization system with React Context and modal forms was implemented on the Frontend, minimizing unnecessary page reloads.

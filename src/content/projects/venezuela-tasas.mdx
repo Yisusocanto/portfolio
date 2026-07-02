@@ -1,0 +1,41 @@
+---
+title: "Venezuela Tasas"
+description: "A full-stack web application providing real-time and historical official exchange rates from the Banco Central de Venezuela (BCV). Designed for businesses and developers who need reliable, official financial data via a clean API and interactive UI."
+github: "https://github.com/Yisusocanto/venezuela-tasas"
+live: "https://venezuela-tasas.vercel.app"
+techs: ["Next js", "FastAPI", "Postgresql", "React", "Tailwindcss"]
+imageUrl: "../../assets/venezuela-tasas-1.png"
+type: "Full Stack"
+---
+
+import Button from "@/components/ui/Button.astro"
+import Separator from "@/components/ui/Separator.astro"
+import VenezuelaTasasChart from "@/assets/venezuela-tasas-2.png"
+import VenezuelaTasasHome from "@/assets/venezuela-tasas-3.png"
+import {Image} from "astro:assets"
+
+A full-stack web application that provides real-time and historical official exchange rates published by the Banco Central de Venezuela (BCV). This project exclusively uses official BCV rates — no parallel or black-market rates — ensuring reliable and transparent currency information.
+
+<div id="the-problem">
+## THE PROBLEM
+</div>
+
+In Venezuela, businesses, developers, and individuals need to track official currency rates daily for billing, accounting, and financial planning. However, the Central Bank of Venezuela (BCV) only publishes these rates on their website without providing an API. Developers were forced to write individual scrapers, which are prone to breaking when the website structure changes or goes offline.
+
+<div id="the-solution">
+## THE SOLUTION
+</div>
+
+Venezuela Tasas provides a central, reliable platform. The FastAPI backend runs an automated daily scraper that parses the BCV website, caches the rates in a PostgreSQL database, and exposes a public, fast REST API. The frontend, built with Next.js/React, displays the current exchange rates, includes a currency calculator, provides historical date-range lookups, and visualizes historical trends with interactive charts.
+
+<Image src={VenezuelaTasasChart} alt={"Venezuela Tasas Chart Mockup"}/>
+
+<div id="technical-challenges">
+## TECHNICAL CHALLENGES
+</div>
+
+- **Resilient Web Scraping**: The BCV website experiences frequent downtime and connection timeouts. The backend scraper was built with robust exception handling, request timeouts, and a fallback cron schedule to guarantee data is scraped as soon as the site is online.
+- **API Performance**: To ensure fast response times for third-party integrations, database indexes were created on date fields, and query caching was implemented to serve historical ranges efficiently.
+- **UX & Data Visualization**: Translating raw tables into digestible trends required integrating responsive charts that work seamlessly on mobile, backed by skeleton loading states to keep the perceived performance high.
+
+<Image src={VenezuelaTasasHome} alt={"Venezuela Tasas Home Mockup"}/>

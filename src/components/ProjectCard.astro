@@ -1,13 +1,14 @@
 ---
 import Chip from "@/components/ui/Chip.astro";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 
 interface Props {
 	slug: string;
 	title: string;
 	description: string;
 	techs: string[];
-	imageUrl: string;
+	imageUrl: any;
 	type: string;
 	reverse?: boolean;
 }
@@ -34,7 +35,7 @@ const {
 			reverse ? "md:col-start-5 md:col-end-13" : "md:col-start-1 md:col-end-9",
 		]}
 	>
-		<img
+		<Image
 			src={imageUrl}
 			alt={`Imagen de ${title}`}
 			class="max-w-full max-h-full object-contain filter brightness-95 group-hover:brightness-100 transition-all duration-500"

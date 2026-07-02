@@ -1,8 +1,11 @@
 ---
-import Prose from "@/components/Prose.astro";
 import Layout from "@/layouts/Layout.astro";
 import { render } from "astro:content";
 import { getCollection } from "astro:content";
+import Separator from "@/components/ui/Separator.astro";
+import Link from "@/components/ui/Link.astro";
+import Button from "@/components/ui/Button.astro";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
 	const projects = await getCollection("projects");
@@ -18,14 +21,191 @@ const { Content } = await render(project);
 ---
 
 <Layout 
-	title={`${project.data.title} | Project by Jesús Ocanto`} 
+	title={`${project.data.title} | Jesús Ocanto`} 
 	description={project.data.description}
 >
-	<main class="px-6 sm:px-0 mb-20">
-		<Prose
-			class="mt-10 prose dark:prose-invert prose-h1:text-6xl prose-h1:md:text-8xl prose-h1:lg:text-display prose-h1:mb-12 prose-h1:tracking-tighter prose-h1:uppercase prose-p:text-xl prose-p:leading-relaxed prose-headings:text-primary max-w-none prose-img:rounded-3xl prose-img:shadow-2xl prose-img:w-full prose-img:h-auto prose-img:my-12"
-		>
-			<Content />
-		</Prose>
+	<main class="w-full mt-10 px-6 sm:px-0 mb-32 flex flex-col gap-12 sm:gap-16">
+		<nav class="flex items-center">
+			<Link href="/projects" variant="none" class="text-xs uppercase tracking-widest text-primary hover:opacity-75 font-semibold transition-opacity flex items-center gap-2">
+				← Back to Projects
+			</Link>
+		</nav>
+
+		<header class="flex flex-col gap-8">
+			<div class="flex flex-col gap-3">
+				<div class="flex items-center gap-3">
+					<span class="text-xs font-semibold uppercase tracking-widest bg-primary/10 text-primary px-3 py-1 border border-primary/20">
+						{project.data.type}
+					</span>
+				</div>
+				<h1 class="text-5xl sm:text-7xl md:text-[80px] lg:text-[100px] font-normal uppercase leading-none tracking-tighter text-primary font-neuehaasdisplay">
+					{project.data.title}
+				</h1>
+			</div>
+
+			<Separator />
+
+			<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+				<div class="lg:col-span-7 flex flex-col gap-6">
+					<h2 class="text-xs uppercase tracking-widest text-secondary/50 font-semibold">Overview</h2>
+					<p class="text-xl sm:text-2xl font-light leading-relaxed text-secondary/90 font-sfuidisplay">
+						{project.data.description}
+					</p>
+				</div>
+
+				<div class="lg:col-span-5 flex flex-col justify-between gap-8 border-l-0 lg:border-l border-secondary/15 lg:pl-10">
+					<div class="flex flex-col gap-6">
+						<div class="flex flex-col gap-2">
+							<span class="text-xs uppercase tracking-widest text-secondary/50 font-semibold">Technologies</span>
+							<div class="flex flex-wrap gap-2">
+								{project.data.techs.map((tech) => (
+									<span class="px-2.5 py-1 bg-secondary/5 text-secondary border border-secondary/20 text-xs uppercase font-medium tracking-wide">
+										{tech}
+									</span>
+								))}
+							</div>
+						</div>
+
+						<div class="grid grid-cols-2 gap-4">
+							<div class="flex flex-col gap-1">
+								<span class="text-xs uppercase tracking-widest text-secondary/50 font-semibold">Role</span>
+								<span class="text-sm font-medium">Full-Stack Developer</span>
+							</div>
+							<div class="flex flex-col gap-1">
+								<span class="text-xs uppercase tracking-widest text-secondary/50 font-semibold">Year</span>
+								<span class="text-sm font-medium">2026</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="flex gap-4 items-center">
+						{project.data.github && (
+							<Button href={project.data.github} target="_blank" class="flex-1" variant="primary">
+								GitHub Repo
+							</Button>
+						)}
+						{project.data.live && (
+							<Button href={project.data.live} target="_blank" class="flex-1" variant="outline">
+								Live Site
+							</Button>
+						)}
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="w-full border border-secondary/15 overflow-hidden">
+			<Image 
+				src={project.data.imageUrl} 
+				alt={`Mockup principal de ${project.data.title}`} 
+				class="w-full object-cover aspect-16/10 md:aspect-21/9"
+			/>
+		</div>
+
+		<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mt-6">
+			<aside class="hidden lg:block lg:col-span-3">
+				<div class="sticky top-24 flex flex-col gap-4">
+					<span class="text-xs uppercase tracking-widest text-secondary/40 font-bold mb-2">Content</span>
+					<ul class="flex flex-col gap-3 text-xs uppercase tracking-wider font-semibold">
+						<li>
+							<a href="#the-problem" class="text-secondary/60 hover:text-primary transition-colors">01. The Problem</a>
+						</li>
+						<li>
+							<a href="#the-solution" class="text-secondary/60 hover:text-primary transition-colors">02. The Solution</a>
+						</li>
+						<li>
+							<a href="#technical-challenges" class="text-secondary/60 hover:text-primary transition-colors">03. Challenges</a>
+						</li>
+					</ul>
+				</div>
+			</aside>
+
+			<div class="lg:col-span-9 project-content font-sfuidisplay">
+				<Content />
+			</div>
+		</section>
 	</main>
 </Layout>
+
+<style is:global>
+	.project-content {
+		font-size: 1.05rem;
+		line-height: 1.7;
+		color: var(--semantic-text);
+	}
+	.project-content p {
+		margin-bottom: 2rem;
+		opacity: 0.9;
+	}
+	.project-content h1 {
+		display: none;
+	}
+	.project-content h2 {
+		font-family: var(--font-neuehaasdisplay);
+		font-size: 1.75rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: -0.02em;
+		color: var(--semantic-primary);
+		margin-top: 3.5rem;
+		margin-bottom: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		scroll-margin-top: 100px;
+	}
+	.project-content h2::after {
+		content: "";
+		display: block;
+		height: 1px;
+		width: 100%;
+		background-color: rgba(71, 36, 37, 0.15);
+	}
+	.dark .project-content h2::after {
+		background-color: rgba(253, 250, 243, 0.15);
+	}
+	.project-content h3 {
+		font-family: var(--font-neuehaasdisplay);
+		font-size: 1.3rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		color: var(--semantic-primary);
+		margin-top: 2.5rem;
+		margin-bottom: 1rem;
+	}
+	.project-content ul {
+		list-style: none;
+		padding-left: 0;
+		margin-bottom: 2.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.project-content ul li {
+		position: relative;
+		padding-left: 1.5rem;
+		font-weight: 300;
+		color: var(--semantic-text);
+	}
+	.project-content ul li strong {
+		font-weight: 500;
+		color: var(--semantic-primary);
+	}
+	.project-content ul li::before {
+		content: "—";
+		position: absolute;
+		left: 0;
+		color: var(--semantic-primary);
+		opacity: 0.6;
+	}
+	.project-content img {
+		width: 100%;
+		height: auto;
+		border: 1px solid rgba(71, 36, 37, 0.15);
+		margin-top: 2.5rem;
+		margin-bottom: 2.5rem;
+	}
+	.dark .project-content img {
+		border-color: rgba(253, 250, 243, 0.15);
+	}
+</style>

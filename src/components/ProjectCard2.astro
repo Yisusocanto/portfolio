@@ -1,7 +1,7 @@
 ---
 import Chip from "@/components/ui/Chip.astro";
 import Link from "@/components/ui/Link.astro";
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 
 interface Props {
 	title: string;
@@ -9,7 +9,7 @@ interface Props {
 	techs: string[];
 	github?: string;
 	description: string;
-	imageUrl: string;
+	imageUrl: any;
 	slug: string;
 	live?: string;
 }
@@ -21,13 +21,10 @@ const { number, github, imageUrl, techs, title, description, slug, live } =
 <section class="group">
 	<a
 		href={`/projects/${slug}`}
-		class="overflow-hidden border border-secondary/10 mb-6"
-	>
+		class="overflow-hidden border border-secondary/10 mb-6 block">
 		<Image
 			src={imageUrl}
 			alt={`Imagen de ${title}`}
-			width={1200}
-			height={480}
 			class="w-full h-48 sm:h-64 md:h-80 lg:h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.01]"
 		/>
 	</a>
@@ -44,8 +41,7 @@ const { number, github, imageUrl, techs, title, description, slug, live } =
 			</p>
 		</div>
 		<div
-			class="flex flex-col justify-between items-end gap-6 md:min-w-[250px] text-right"
-		>
+			class="flex flex-col justify-between items-end gap-6 md:min-w-[250px] text-right">
 			<div class="flex flex-wrap gap-2 justify-end">
 				{
 					techs.map((tech) => (

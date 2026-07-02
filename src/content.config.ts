@@ -7,13 +7,13 @@ const projectCollection = defineCollection({
 		pattern: "**/[^_]*.{md,mdx}",
 		base: "./src/content/projects",
 	}),
-	schema: z.object({
+	schema: ({ image }) => z.object({
 		title: z.string(),
 		description: z.string(),
-		github: z.url(),
+		github: z.string(),
 		techs: z.array(z.string()),
-		live: z.url().optional(),
-		imageUrl: z.string(),
+		live: z.string().optional(),
+		imageUrl: image(),
 		type: z.string(),
 	}),
 });
