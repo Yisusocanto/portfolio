@@ -12,7 +12,7 @@ const links: LinkType[] = [
 ---
 
 <nav
-	class="bg-primary/10 rounded-4xl p-6 w-full h-12 sm:w-fit flex items-center justify-between gap-2 sm:gap-4">
+	class="bg-primary/10 rounded-4xl p-2 sm:p-4 w-full h-12 text-xs sm:text-base sm:w-fit flex items-center justify-between gap-2 sm:gap-4">
 	{links.map((link) => <Link href={link.href}>{link.label}</Link>)}
 	<ThemeToggle />
 </nav>
