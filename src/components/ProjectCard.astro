@@ -25,16 +25,14 @@ const {
 ---
 
 <div
-	class="grid grid-cols-1 md:grid-cols-12 gap-y-6 md:gap-y-0 items-center w-full relative group select-none"
->
+	class="grid grid-cols-1 md:grid-cols-12 gap-y-6 md:gap-y-0 items-center w-full relative group select-none">
 	<!-- Dark Image Card -->
 	<a
 		href={`/projects/${slug}`}
 		class:list={[
-			"bg-inverse p-6 sm:p-10 md:p-14 aspect-16/10 flex items-center justify-center z-0 transition-transform duration-500 ease-out hover:scale-[1.01] md:row-start-1 border shadow-md",
+			"bg-inverse aspect-16/10 flex items-center justify-center z-0 transition-transform duration-500 ease-out hover:scale-[1.01] md:row-start-1 border shadow-md",
 			reverse ? "md:col-start-5 md:col-end-13" : "md:col-start-1 md:col-end-9",
-		]}
-	>
+		]}>
 		<Image
 			src={imageUrl}
 			alt={`Imagen de ${title}`}
@@ -49,23 +47,19 @@ const {
 			reverse
 				? "md:col-start-1 md:col-end-7 md:text-start"
 				: "md:col-start-7 md:col-end-13 text-start",
-		]}
-	>
+		]}>
 		<span
-			class="text-[10px] tracking-[0.3em] font-semibold font-sfuidisplay uppercase mb-4 block opacity-60"
-		>
+			class="text-[10px] tracking-[0.3em] font-semibold font-sfuidisplay uppercase mb-4 block opacity-60">
 			{type}
 		</span>
 		<h2
-			class="text-3xl sm:text-4xl md:text-5xl font-normal font-neuehaasdisplay mb-6 uppercase tracking-tighter leading-none"
-		>
+			class="text-3xl sm:text-4xl md:text-5xl font-normal font-neuehaasdisplay mb-6 uppercase tracking-tighter leading-none">
 			<a href={`/projects/${slug}`} class="hover:opacity-70 transition-opacity">
 				{title}
 			</a>
 		</h2>
 		<p
-			class="mb-8 text-base sm:text-lg font-sfuidisplay font-light leading-relaxed opacity-90"
-		>
+			class="mb-8 text-base sm:text-lg font-sfuidisplay font-light leading-relaxed opacity-90">
 			{description}
 		</p>
 		<!-- Tech stack empty outline circles -->
