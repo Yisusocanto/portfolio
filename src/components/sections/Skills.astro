@@ -3,46 +3,53 @@ import Chip from "@/components/ui/Chip.astro";
 import Separator from "@/components/ui/Separator.astro";
 
 const frontend = ["Next js", "React", "Astro", "TypeScript", "TailwindCSS"];
-
 const backend = ["FastAPI", "Flask", "PostgreSQL"];
-
 const infra = ["Docker"];
 ---
 
-<section class="w-full">
-	<h1
-		class="text-7xl md:text-8xl lg:text-display-lg tracking-widest uppercase mb-12"
-		>SKILLS</h1
-	>
-	<div class="flex flex-col sm:flex-row justify-between gap-6">
-		<div class="flex-1 border-r-2 border-r-primary/40">
-			<h3 class="text-2xl font-bold uppercase mb-4">Frontend</h3>
-			<div class="flex flex-col gap-4">
-				{
-					frontend.map((skill) => (
-						<Chip icon={skill.replace(" ", "").toLowerCase()}>{skill}</Chip>
-					))
-				}
+<section class="w-full py-16">
+	<div class="flex flex-col md:flex-row gap-10 md:gap-16 w-full">
+		<div class="w-full md:w-[35%] flex flex-col gap-6 md:sticky md:top-28 h-fit md:pr-4">
+			<div>
+				<span class="text-xs font-semibold uppercase tracking-widest text-primary/60">Toolkit</span>
+				<h2 class="text-4xl md:text-5xl lg:text-[52px] font-normal uppercase tracking-tighter leading-none mt-2 font-neuehaasdisplay">
+					Skills &<br />Expertise
+				</h2>
 			</div>
+			<p class="text-base font-light leading-relaxed text-secondary/80 font-sfuidisplay max-w-sm">
+				A curated selection of frameworks, languages, and technologies I specialize in to build robust, performant web applications.
+			</p>
 		</div>
-		<div class="flex-1 border-r-2 border-r-primary/40">
-			<h3 class="text-2xl font-bold uppercase mb-4">Backend</h3>
+
+		<div class="w-full md:w-[65%] flex flex-col gap-10">
 			<div class="flex flex-col gap-4">
-				{
-					backend.map((skill) => (
+				<h3 class="text-xs uppercase tracking-widest text-primary/50 font-bold">01. Frontend Integration</h3>
+				<Separator />
+				<div class="flex flex-wrap gap-3 mt-2">
+					{frontend.map((skill) => (
 						<Chip icon={skill.replace(" ", "").toLowerCase()}>{skill}</Chip>
-					))
-				}
+					))}
+				</div>
 			</div>
-		</div>
-		<div class="flex-1">
-			<h3 class="text-2xl font-bold uppercase mb-4">Infrastructure</h3>
+
 			<div class="flex flex-col gap-4">
-				{
-					infra.map((skill) => (
+				<h3 class="text-xs uppercase tracking-widest text-primary/50 font-bold">02. Backend Architecture</h3>
+				<Separator />
+				<div class="flex flex-wrap gap-3 mt-2">
+					{backend.map((skill) => (
 						<Chip icon={skill.replace(" ", "").toLowerCase()}>{skill}</Chip>
-					))
-				}
+					))}
+				</div>
+			</div>
+
+			<div class="flex flex-col gap-4">
+				<h3 class="text-xs uppercase tracking-widest text-primary/50 font-bold">03. Systems & Infra</h3>
+				<Separator />
+				<div class="flex flex-wrap gap-3 mt-2">
+					{infra.map((skill) => (
+						<Chip icon={skill.replace(" ", "").toLowerCase()}>{skill}</Chip>
+					))}
+				</div>
 			</div>
 		</div>
 	</div>

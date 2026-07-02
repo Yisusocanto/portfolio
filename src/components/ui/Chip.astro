@@ -9,7 +9,8 @@ const { icon } = Astro.props;
 ---
 
 <span
-	class="flex min-w-fit max-w-fit items-center gap-2 rounded-2xl p-2 bg-primary/10 hover:bg-primary/20 border">
-	{icon && <Icon name={icon} class={"h-6 w-6"} />}
+	class="flex min-w-fit max-w-fit items-center gap-3 border border-primary/15 bg-primary/5 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-primary transition-all duration-300 hover:bg-primary hover:text-on-primary"
+>
+	{icon && <Icon name={icon} class="h-4 w-4" />}
 	<slot />
 </span>

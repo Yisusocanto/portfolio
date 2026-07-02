@@ -30,12 +30,13 @@ const { description, title } = Astro.props;
 		<title>{title}</title>
 		<meta name="description" content={description} />
 
-		<!-- Open Graph (para redes sociales) -->
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 	</head>
-	<body class="w-full sm:max-w-3/4 lg:max-w-3/5 m-auto mt-10">
-		<header class="flex justify-end"><Navbar /></header>
+	<body class="w-full sm:max-w-3/4 lg:max-w-3/5 m-auto pt-6 px-6 sm:px-0">
+		<header class="sticky top-0 z-50 flex justify-end py-4 mb-10">
+			<Navbar />
+		</header>
 		<slot />
 		<Footer />
 	</body>
