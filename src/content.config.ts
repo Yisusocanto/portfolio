@@ -11,7 +11,7 @@ const projectCollection = defineCollection({
 		z.object({
 			title: z.string(),
 			description: z.string(),
-			github: z.string(),
+			github: z.string().optional(),
 			techs: z.array(z.string()),
 			live: z.string().optional(),
 			imageUrl: image(),

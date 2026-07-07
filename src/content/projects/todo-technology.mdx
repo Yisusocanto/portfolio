@@ -1,0 +1,71 @@
+---
+title: "Todo Technology"
+description: "A tailor-made ERP/MES production management system for a large-scale sublimation and textile manufacturing company. The      
+  platform synchronizes the sales department with graphic design, fabric cutting, heat-pressing, sewing, and shipping in real- 
+  time, ensuring absolute traceability of every order."
+type: "Full Stack"
+imageUrl: "../../assets/todo-technology-1.png"
+year: "February 2026 - Present"
+techs: ["FastAPI", "Next js", "Postgresql", "React", "Tailwindcss", "Docker"]
+---
+
+import TodoTechnologyPedidoDetalle from "@/assets/todo-technology-3.png"
+import TodoTechnologyPedidos from "@/assets/todo-technology-2.png"
+import TodoTechnologyCreacion from "@/assets/todo-technology-4.png"
+import { Image } from "astro:assets"
+
+A tailor-made ERP/MES production management system for a large-scale sublimation and textile manufacturing company. The      
+  platform synchronizes the sales department with graphic design, fabric cutting, heat-pressing, sewing, and shipping in real- 
+  time, ensuring absolute traceability of every order.
+
+<div id="the-problem">
+## THE PROBLEM
+</div>
+
+ The company was relying on legacy workflows, causing scheduling friction and data loss. The main challenge lay in the extreme
+  variability of the products (e.g., hats, jackets, lanyards). Each product type required dynamic and conditional              
+  specifications (e.g., some garments allow combined printing techniques, others demand mutually exclusive options like        
+  "With/Without Hood", and others require handwritten free-text instructions). Modeling this level of flexibility in a         
+  traditional relational database—without creating dozens of empty tables or overcomplicating the user interface—posed a major 
+  architectural roadblock.
+
+<Image src={TodoTechnologyPedidoDetalle} alt="Todo Technology order detail page."/>
+
+<div id="the-solution">
+## THE SOLUTION
+</div>
+
+I designed and built a dockerized modular web platform that unifies the entire product life cycle:                           
+                                                                                                                               
+  • Sales Module: Dynamic order creation with built-in financial downpayment validation.                                       
+  • Admin Panel: A visual schema creator allowing administrators to configure custom product fields with user-friendly Spanish 
+  labels (Single Select, Multi-Select, Radio buttons, and Free-Text).                                                          
+  • Production Dashboards: Interactive work queues optimized for each operational role (designers, cutters, tailors) displaying
+  only the exact information needed for their current phase.                                                                   
+  • Dockerized Infrastructure: Complete containerization of the architecture (FastAPI, Next.js, and PostgreSQL) using optimized
+  configurations for both local environments and production deployments.                                                       
+  • PDF Receipts: Automated generation of technical production sheets and QR codes for one-click status transitions. 
+
+<Image src={TodoTechnologyPedidos} alt="Todo Technology orders page."/>
+
+
+<div id="technical-challenges">
+## TECHNICAL CHALLENGES
+</div>
+
+- Hybrid Data Architecture (Dynamic EAV): I solved product variability by extending the traditional relational model in     
+  PostgreSQL. I designed a schema capable of persisting both multi-select checkboxes and manual free-text inputs inside the    
+  same junction table, optimizing queries with proper indexing.                                                                
+  - Hybrid Development Environment & Multi-stage Builds: I designed a smart containerization strategy with Docker Compose:    
+      • Hybrid Dev Environment: I configured the PostgreSQL database in an isolated Docker container while letting developers  
+      run frontend and backend applications locally on Windows to take advantage of Next.js Turbopack ultra-fast hot-reloads.  
+      • Production Ready: I crafted optimized Docker images using multi-stage builds for weasyprint and Python/Next.js         
+      dependencies, achieving secure and ultralight production footprints.                                                     
+  - Data Processing & Flattening: I implemented client-side flattening algorithms ( flatMap ) to format complex UI selections 
+  into flat API payloads, combined with server-side aggregations to consolidate identical items. This allows the cutting       
+  department to view grouped summaries of pieces without visual redundancy.                                                    
+  - Cloud Deployment Resiliency (Railway): To bypass the lack of permanent interactive SSH access in Railway's classic        
+  Nixpacks deployments, I built an emergency hook into the API startup cycle (lifespan event). This hook automatically detects 
+  specific environment variables to reactivate accounts or securely reset the administrator's password during boot.
+
+<Image src={TodoTechnologyCreacion} alt="Todo Technology order creation page."/>
