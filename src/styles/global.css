@@ -32,15 +32,15 @@
     BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* ── Typography — Scale ── */
-  --text-heading: 27px;
-  --leading-heading: 1;
-  --tracking-heading: -0.54px;
-  --text-display-lg: 130px;
-  --leading-display-lg: 0.80;
-  --tracking-display-lg: -3.375px;
-  --text-display: 180px;
-  --leading-display: 0.86;
-  --tracking-display: -4.7px;
+  --text-heading: 24px;
+  --leading-heading: 1.15;
+  --tracking-heading: -0.02em;
+  --text-display-lg: clamp(2.5rem, 5.5vw, 4.5rem);
+  --leading-display-lg: 0.95;
+  --tracking-display-lg: -0.03em;
+  --text-display: clamp(3.25rem, 7.5vw, 6rem);
+  --leading-display: 0.92;
+  --tracking-display: -0.035em;
 
   /* ── NO custom --spacing-* variables ──
      Tailwind v4 uses a dynamic scale: n × var(--spacing, 0.25rem)

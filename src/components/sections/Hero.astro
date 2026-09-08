@@ -1,8 +1,45 @@
-<section class="w-full pt-10">
-	<h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-display leading-none tracking-tighter uppercase">
-		JESUS <br /> OCANTO
-	</h1>
-	<h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-display-lg opacity-80 uppercase tracking-tight">
-		FULL-STACK <br class="sm:hidden" /> DEVELOPER
-	</h2>
+---
+import Button from "@/components/ui/Button.astro";
+---
+
+<section class="w-full pt-4 sm:pt-8 md:pt-10 pb-6 flex flex-col gap-6 select-none">
+	<div class="flex items-center gap-3">
+		<span
+			class="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono tracking-widest uppercase border border-primary/20 bg-primary/5 text-primary">
+			<span class="w-1.5 h-1.5 bg-emerald-500 animate-pulse"></span>
+			Available for projects
+		</span>
+	</div>
+
+	<div class="flex flex-col gap-1">
+		<h1
+			class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[88px] font-normal leading-[0.92] tracking-tighter uppercase font-neuehaasdisplay text-primary">
+			JESÚS <br class="hidden sm:inline" /> OCANTO
+		</h1>
+		<h2
+			class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal opacity-80 uppercase tracking-tight font-neuehaasdisplay text-primary mt-2">
+			FULL-STACK DEVELOPER
+		</h2>
+	</div>
+
+	<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-2 border-t border-primary/10">
+		<p
+			class="max-w-xl text-base sm:text-lg text-secondary/85 font-light leading-relaxed font-sfuidisplay">
+			Crafting high-performance web applications, resilient backend architectures, and fluid mobile products with modern frameworks and mathematical precision.
+		</p>
+		<div class="flex items-center gap-3 shrink-0">
+			<Button
+				href="#experience"
+				variant="primary"
+				class="px-5 py-3">
+				View Work ↓
+			</Button>
+			<Button
+				href="/contact"
+				variant="outline"
+				class="px-5 py-3">
+				Contact Me →
+			</Button>
+		</div>
+	</div>
 </section>

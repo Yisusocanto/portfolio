@@ -1,0 +1,65 @@
+---
+title: "Fialo"
+description: "A cross-platform mobile solution designed for small and medium-sized businesses—such as corner stores, local markets, and neighborhood bodegas—that need to manage credit accounts, track outstanding customer debts, and record payments quickly, reliably, and in real time."
+github: "https://github.com/Yisusocanto/fialo"
+techs: ["Nest js", "Expo", "React Native", "TypeScript", "PostgreSQL", "Prisma", "TailwindCSS"]
+imageUrl: "../../assets/fialo-1.png"
+type: "Mobile & Full Stack"
+year: "2025"
+category: "project"
+isOpenSource: true
+---
+
+import { Image } from "astro:assets"
+import FialoMockup from "@/assets/fialo-1.png"
+import FialoTransactions from "@/assets/fialo-2.jpg"
+import FialoCustomer from "@/assets/fialo-3.jpg"
+
+A cross-platform mobile application designed to modernize credit bookkeeping for neighborhood corner stores and local merchants. It eliminates paper ledgers and manual calculations by providing an intuitive, multi-tenant mobile ledger with real-time financial metrics, credit limits, and immediate debt settlement tracking.
+
+<Image src={FialoMockup} alt="Fialo Mobile Suite Showcase Mockup" />
+
+<div id="the-problem">
+## THE PROBLEM
+</div>
+
+In Latin America and many emerging markets, traditional neighborhood shops ("bodegas", "abastos", and convenience stores) depend heavily on informal customer credit ("fiado") to maintain customer loyalty and drive daily sales. However, this credit system is traditionally tracked using handwritten notebooks or loose paper slips.
+
+This creates critical operational friction:
+- **Frequent Accounting Discrepancies**: Illegible notes, lost ledger sheets, and forgotten debts lead directly to revenue loss and strained customer relationships.
+- **Zero Real-Time Visibility**: Shop owners lack immediate insight into total outstanding debt, making it difficult to gauge true working capital or enforce safe credit limits.
+- **Team Synchronization Friction**: Multiple workers taking orders and receiving cash installments throughout the day often leads to unrecorded payments, double counting, or untracked transactions.
+
+<div id="the-solution">
+## THE SOLUTION
+</div>
+
+Fialo delivers a modern, high-performance mobile platform tailored specifically to the daily workflows of store owners and clerks:
+
+- **Multi-Tenant Architecture**: Each business operates in complete isolation, with dedicated customer registries, transaction history, and custom store configurations.
+- **Role-Based Access & Instant Session Revocation**: Differentiates between store administrators and workers. Workers can quickly register customers, grant credit, and record payments, while admins retain control over metrics, reports, and staff management.
+- **Real-Time Financial Dashboard**: Aggregates total accounts receivable at a glance, with filters by period (Today, This Week, This Month, and All-Time) and a 7-day comparative SVG chart contrasting credits granted against payments received.
+- **Smart Customer Ledgers & Credit Limits**: Full customer profiles featuring tax ID (cédula), phone numbers, active/inactive credit flags, and custom credit ceilings to prevent overextension.
+- **Flexible Payments & Reference Tracking**: Support for multiple payment methods, including mobile payments and bank transfers with transaction reference verification.
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 my-12">
+	<div class="flex flex-col items-center gap-3">
+		<Image src={FialoTransactions} alt="Fialo Transactions and Movement History" class="max-w-[280px] shadow-lg border border-primary/20" />
+		<span class="text-xs uppercase tracking-widest text-primary/60 font-mono">Movimientos & Ledger</span>
+	</div>
+	<div class="flex flex-col items-center gap-3">
+		<Image src={FialoCustomer} alt="Fialo Customer Detail and Credit Management" class="max-w-[280px] shadow-lg border border-primary/20" />
+		<span class="text-xs uppercase tracking-widest text-primary/60 font-mono">Customer Credit Profile</span>
+	</div>
+</div>
+
+<div id="technical-challenges">
+## TECHNICAL CHALLENGES
+</div>
+
+Building a reliable financial application with cross-platform native performance involved several key technical considerations:
+
+- **Zero-Loss Floating-Point Precision**: Financial ledgers cannot tolerate JavaScript floating-point rounding errors. Integrated `Decimal.js` across the NestJS backend and Prisma ORM layer to guarantee exact decimal arithmetic on all debits, credits, and historical aggregations.
+- **Multi-Tenant Data Isolation**: Implemented a strict repository pattern and tenancy middleware in NestJS, ensuring that every database query automatically scopes data to the authenticated tenant to prevent cross-tenant data leaks.
+- **Stateless Yet Instant Session Invalidation**: To maintain strict security, worker permissions are verified dynamically. When an administrator deactivates a worker, active JWT sessions are immediately invalidated across devices without requiring heavy state polling.
+- **Fluid Mobile-First UI/UX**: Designed a fast, tactile interface using React Native, Expo, and Tailwind CSS (NativeWind). Integrated `@gorhom/bottom-sheet` and gesture handlers to deliver instant modal interactions for rapid checkout and payment logging in fast-paced retail environments.

@@ -60,9 +60,12 @@ const { description, title } = Astro.props;
 			content="https://portfolio-five-drab-34.vercel.app/og-image.jpg"
 		/>
 	</head>
-	<body class="w-full sm:max-w-3/4 lg:max-w-3/5 m-auto pt-6 px-6 sm:px-0">
-		<header class="sticky top-0 z-50 flex justify-end py-4 mb-10">
-			<Navbar />
+	<body
+		class="w-full max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 pt-4 pb-12 min-h-screen flex flex-col justify-between">
+		<header class="sticky top-0 z-50 flex justify-end py-4 mb-8 sm:mb-12 pointer-events-none">
+			<div class="pointer-events-auto">
+				<Navbar />
+			</div>
 		</header>
 		<slot />
 		<Footer />

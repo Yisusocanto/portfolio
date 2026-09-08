@@ -1,0 +1,76 @@
+---
+import Chip from "@/components/ui/Chip.astro";
+import Button from "@/components/ui/Button.astro";
+import Separator from "@/components/ui/Separator.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const allProjects = await getCollection("projects");
+const workExperiences = allProjects.filter((p) => p.data.category === "work");
+const work = workExperiences[0];
+---
+
+{
+	work && (
+		<section id="experience" class="py-10">
+			<div class="mb-12">
+				<div class="flex flex-col sm:flex-row justify-between items-baseline gap-4 mb-3">
+					<div>
+						<span class="text-xs uppercase tracking-[0.25em] text-primary/70 font-mono mb-2 block">
+							01 / Professional Career
+						</span>
+						<h3 class="text-4xl sm:text-6xl md:text-7xl font-normal uppercase tracking-tighter leading-none font-neuehaasdisplay text-primary">
+							WORK EXPERIENCE
+						</h3>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="text-xs uppercase tracking-widest font-mono text-primary/70 font-semibold border border-primary/20 bg-primary/5 px-3 py-1">
+							{work.data.year}
+						</span>
+					</div>
+				</div>
+				<Separator />
+			</div>
+
+			<article class="border border-primary/20 bg-surface shadow-md p-6 sm:p-10 md:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+				<div class="w-full lg:w-1/2 flex flex-col justify-center">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-[10px] tracking-[0.25em] font-semibold font-mono uppercase text-primary/70">
+							Enterprise ERP / MES Platform
+						</span>
+					</div>
+					<h4 class="text-3xl sm:text-4xl md:text-5xl font-normal font-neuehaasdisplay mb-4 uppercase tracking-tighter leading-none text-primary">
+						<a href={`/projects/${work.id}`} class="hover:opacity-75 transition-opacity">
+							{work.data.title}
+						</a>
+					</h4>
+					<p class="mb-6 text-sm sm:text-base font-sfuidisplay font-light leading-relaxed text-secondary/85">
+						{work.data.description}
+					</p>
+					<div class="flex gap-2 flex-wrap mb-8">
+						{work.data.techs.map((tech) => (
+							<Chip icon={tech.replace(" ", "").toLowerCase()}>{tech}</Chip>
+						))}
+					</div>
+					<div class="pt-4 border-t border-primary/10 flex flex-wrap gap-4 items-center">
+						<Button href={`/projects/${work.id}`} variant="primary">
+							Case Study & System Breakdown →
+						</Button>
+					</div>
+				</div>
+
+				<div class="w-full lg:w-1/2">
+					<a
+						href={`/projects/${work.id}`}
+						class="block border border-primary/20 bg-surface overflow-hidden aspect-16/10 group shadow-sm hover:border-primary/50 transition-all duration-500">
+						<Image
+							src={work.data.imageUrl}
+							alt={`Mockup de ${work.data.title}`}
+							class="w-full h-full object-cover filter brightness-95 group-hover:brightness-100 group-hover:scale-[1.02] transition-all duration-700 ease-out"
+						/>
+					</a>
+				</div>
+			</article>
+		</section>
+	)
+}

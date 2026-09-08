@@ -1,49 +1,128 @@
 ---
 import ProjectCard2 from "@/components/ProjectCard2.astro";
 import Separator from "@/components/ui/Separator.astro";
+import Button from "@/components/ui/Button.astro";
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import Link from "@/components/ui/Link.astro";
 
-const projects = await getCollection("projects");
+const allProjects = await getCollection("projects");
+
+const workExperiences = allProjects.filter((p) => p.data.category === "work");
+// Order personal projects: Fialo first (mobile/fullstack flagship), then others
+const personalProjects = allProjects
+	.filter((p) => p.data.category !== "work")
+	.sort((a, b) => (a.id === "fialo" ? -1 : b.id === "fialo" ? 1 : 0));
 ---
 
 <Layout
-	title="Project Portfolio | Jesús Ocanto"
-	description="Explore my latest work in full-stack development, ranging from robust backend systems to polished, responsive frontend interfaces.">
-	<main class="flex flex-col gap-20 mt-10 px-6 sm:px-0 mb-20">
+	title="Work Experience & Projects | Jesús Ocanto"
+	description="Explore my production work experience and software projects in full-stack, backend architecture, and mobile development.">
+	<main class="flex flex-col gap-16 mt-4 sm:mt-8 mb-20">
 		<div>
+			<span
+				class="text-xs uppercase tracking-[0.25em] text-primary/70 font-mono mb-2 block">
+				Selected Works ({allProjects.length})
+			</span>
 			<h1
-				class="text-4xl sm:text-6xl md:text-8xl lg:text-display-lg leading-none mb-6 tracking-tighter uppercase"
-				>PROJECTS <br /> & <br /> EXPERIENCES</h1
-			>
+				class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-none mb-6 tracking-tighter uppercase font-neuehaasdisplay text-primary">
+				EXPERIENCE & PROJECTS
+			</h1>
 			<Separator />
 		</div>
-		<div class="flex flex-col gap-24 md:gap-32">
-			{
-				projects.map((project, i) => (
-					<ProjectCard2
-						title={project.data.title}
-						number={i + 1}
-						techs={project.data.techs}
-						github={project.data.github}
-						description={project.data.description}
-						imageUrl={project.data.imageUrl}
-						slug={project.id}
-					/>
-				))
-			}
-		</div>
-		<Separator />
-		<div class="flex flex-col gap-8 text-center py-10">
-			<span class="uppercase tracking-widest opacity-60">Have a project?</span>
-			<h4
-				class="text-5xl md:text-8xl lg:text-display-lg font-bold uppercase tracking-tighter leading-none"
-				>Let's work together</h4
-			>
-			<div class="flex justify-center mt-4">
-				<Link href={"/contact"}>Contact</Link>
+
+		<!-- Section 1: Work Experience (Always First) -->
+		<section class="flex flex-col gap-10">
+			<div class="flex flex-col sm:flex-row justify-between sm:items-baseline gap-2">
+				<div>
+					<span class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono block mb-1">
+						01 / Professional Career
+					</span>
+					<h2 class="text-2xl sm:text-4xl font-normal uppercase tracking-tight font-neuehaasdisplay text-primary">
+						Work Experience
+					</h2>
+				</div>
+				<span class="text-xs uppercase font-mono tracking-widest text-primary/60">
+					Enterprise & Commercial Production
+				</span>
 			</div>
+
+			<div class="flex flex-col gap-16">
+				{
+					workExperiences.map((project, i) => (
+						<ProjectCard2
+							title={project.data.title}
+							number={i + 1}
+							techs={project.data.techs}
+							github={project.data.github}
+							description={project.data.description}
+							imageUrl={project.data.imageUrl}
+							slug={project.id}
+							live={project.data.live}
+							category={project.data.category}
+							isOpenSource={project.data.isOpenSource}
+						/>
+					))
+				}
+			</div>
+		</section>
+
+		<Separator />
+
+		<!-- Section 2: Projects -->
+		<section class="flex flex-col gap-10">
+			<div class="flex flex-col sm:flex-row justify-between sm:items-baseline gap-2">
+				<div>
+					<span class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono block mb-1">
+						02 / Software & Mobile Apps
+					</span>
+					<h2 class="text-2xl sm:text-4xl font-normal uppercase tracking-tight font-neuehaasdisplay text-primary">
+						Projects
+					</h2>
+				</div>
+				<span class="text-xs uppercase font-mono tracking-widest text-primary/60">
+					Personal & Open Source ({personalProjects.length})
+				</span>
+			</div>
+
+			<div class="flex flex-col gap-20 md:gap-28">
+				{
+					personalProjects.map((project, i) => (
+						<ProjectCard2
+							title={project.data.title}
+							number={i + 1}
+							techs={project.data.techs}
+							github={project.data.github}
+							description={project.data.description}
+							imageUrl={project.data.imageUrl}
+							slug={project.id}
+							live={project.data.live}
+							category={project.data.category}
+							isOpenSource={project.data.isOpenSource}
+						/>
+					))
+				}
+			</div>
+		</section>
+
+		<Separator />
+
+		<div class="flex flex-col items-center gap-6 text-center py-12">
+			<span class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono">
+				Have an idea in mind?
+			</span>
+			<h4
+				class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-tighter leading-none font-neuehaasdisplay text-primary">
+				Let's work together
+			</h4>
+			<p class="max-w-md text-secondary/80 font-light text-base leading-relaxed">
+				I am currently open to exciting freelance opportunities, contracts, and full-time roles.
+			</p>
+			<Button
+				href="/contact"
+				variant="primary"
+				class="px-8 py-4 mt-2">
+				Start a Conversation →
+			</Button>
 		</div>
 	</main>
 </Layout>

@@ -1,6 +1,6 @@
 ---
 import Chip from "@/components/ui/Chip.astro";
-import Link from "@/components/ui/Link.astro";
+import Button from "@/components/ui/Button.astro";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -12,54 +12,95 @@ interface Props {
 	imageUrl: any;
 	slug: string;
 	live?: string;
+	category?: "work" | "project" | string;
+	isOpenSource?: boolean;
 }
 
-const { number, github, imageUrl, techs, title, description, slug, live } =
-	Astro.props;
+const {
+	number,
+	github,
+	imageUrl,
+	techs,
+	title,
+	description,
+	slug,
+	live,
+	category = "project",
+	isOpenSource = false,
+} = Astro.props;
+
+const badgeText =
+	category === "work"
+		? `${number.toString().padStart(2, "0")} — WORK EXPERIENCE`
+		: isOpenSource
+			? `${number.toString().padStart(2, "0")} — OPEN SOURCE`
+			: `${number.toString().padStart(2, "0")} — PROJECT`;
 ---
 
-<section class="group">
+<article class="group flex flex-col gap-6 select-none">
 	<a
 		href={`/projects/${slug}`}
-		class="overflow-hidden border border-secondary/10 mb-6 block">
-		<Image
-			src={imageUrl}
-			alt={`Imagen de ${title}`}
-			class="w-full h-48 sm:h-64 md:h-80 lg:h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.01]"
-		/>
+		class="overflow-hidden border border-primary/20 bg-surface shadow-sm hover:border-primary/50 transition-all duration-500 block relative">
+		<div class="w-full aspect-16/9 overflow-hidden bg-surface">
+			<Image
+				src={imageUrl}
+				alt={`Mockup de ${title}`}
+				class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+			/>
+		</div>
 	</a>
-	<div class="flex flex-col md:flex-row justify-between gap-6">
-		<div class="flex flex-col gap-2 text-start flex-1">
-			<span class="text-xs uppercase tracking-widest text-secondary/70">
-				{number.toString().padStart(2, "0")} — Open source
-			</span>
-			<h3 class="text-3xl text-accent font-bold uppercase">
-				{title}
+
+	<div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+		<div class="flex flex-col gap-3 flex-1 min-w-0 max-w-3xl">
+			<div class="flex items-center gap-3">
+				<span
+					class="text-xs uppercase tracking-[0.2em] text-primary/70 font-mono font-semibold">
+					{badgeText}
+				</span>
+			</div>
+
+			<h3
+				class="text-3xl sm:text-4xl text-primary font-normal uppercase tracking-tight font-neuehaasdisplay">
+				<a href={`/projects/${slug}`} class="hover:opacity-75 transition-opacity">
+					{title}
+				</a>
 			</h3>
-			<p class="text-secondary/80 mt-2 max-w-2xl text-sm leading-relaxed">
+
+			<p
+				class="text-secondary/85 text-base sm:text-lg leading-relaxed font-light font-sfuidisplay">
 				{description}
 			</p>
-		</div>
-		<div
-			class="flex flex-col justify-between items-end gap-6 md:min-w-[250px] text-right">
-			<div class="flex flex-wrap gap-2 justify-end">
+
+			<div class="flex flex-wrap gap-2 pt-2">
 				{
 					techs.map((tech) => (
 						<Chip icon={tech.replace(" ", "").toLowerCase()}>{tech}</Chip>
 					))
 				}
 			</div>
-			<div class="flex gap-6 items-center">
+		</div>
+
+		<div
+			class="flex flex-wrap lg:flex-col items-center lg:items-end justify-between lg:justify-start gap-3 shrink-0 pt-2">
+			<div class="flex flex-wrap gap-3 items-center">
 				{
 					github && (
-						<Link target="_blank" href={github}>
-							Github
-						</Link>
+						<Button href={github} target="_blank" variant="outline">
+							GitHub ↗
+						</Button>
 					)
 				}
-				<Link href={`/projects/${slug}`}>Ver detalles</Link>
-				{live && <Link href={live}>Live</Link>}
+				{
+					live && (
+						<Button href={live} target="_blank" variant="outline">
+							Live Demo ↗
+						</Button>
+					)
+				}
+				<Button href={`/projects/${slug}`} variant="primary">
+					View Details →
+				</Button>
 			</div>
 		</div>
 	</div>
-</section>
+</article>

@@ -17,6 +17,8 @@ const projectCollection = defineCollection({
 			imageUrl: image(),
 			type: z.string(),
 			year: z.string(),
+			category: z.enum(["work", "project"]).default("project"),
+			isOpenSource: z.boolean().default(false),
 		}),
 });
 
