@@ -5,10 +5,22 @@ import Button from "@/components/ui/Button.astro";
 import { getCollection } from "astro:content";
 
 const allProjects = await getCollection("projects");
-// Filter out work experience (Todo Technology is handled in Experience.astro)
+// Order personal projects: Fialo, Venezuela Tasas Bot, Pixel Reviews, Venezuela Tasas, Smart Link
+const priorityOrder = [
+	"fialo",
+	"venezuela-tasas-bot",
+	"pixel-reviews",
+	"venezuela-tasas",
+	"smart-link",
+];
 const personalProjects = allProjects
 	.filter((p) => p.data.category !== "work")
-	.sort((a, b) => (a.id === "fialo" ? -1 : b.id === "fialo" ? 1 : 0));
+	.sort((a, b) => {
+		const aIdx = priorityOrder.indexOf(a.id);
+		const bIdx = priorityOrder.indexOf(b.id);
+		return (aIdx !== -1 ? aIdx : 99) - (bIdx !== -1 ? bIdx : 99);
+	});
+const featuredProjects = personalProjects.slice(0, 4);
 ---
 
 <section id="projects" class="py-10">
@@ -37,7 +49,7 @@ const personalProjects = allProjects
 
 	<div class="flex flex-col gap-20 md:gap-32">
 		{
-			personalProjects.map((project, i) => (
+			featuredProjects.map((project, i) => (
 				<ProjectCard
 					title={project.data.title}
 					description={project.data.description}

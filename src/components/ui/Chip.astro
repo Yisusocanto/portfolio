@@ -6,11 +6,35 @@ interface Props {
 }
 
 const { icon } = Astro.props;
+
+const availableIcons = new Set([
+	"astro",
+	"docker",
+	"expo",
+	"express",
+	"fastapi",
+	"flask",
+	"mongodb",
+	"nestjs",
+	"nextjs",
+	"postgresql",
+	"prisma",
+	"prismaorm",
+	"python",
+	"react",
+	"reactnative",
+	"tailwindcss",
+	"telegram",
+	"typescript",
+]);
+
+const normalizedIcon = icon ? icon.toLowerCase() : "";
+const hasIcon = normalizedIcon && availableIcons.has(normalizedIcon);
 ---
 
 <span
-	class="flex min-w-fit max-w-fit items-center gap-3 border border-primary/15 bg-primary/5 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-primary transition-all duration-300 hover:bg-primary hover:text-on-primary"
+	class="flex min-w-fit max-w-fit items-center gap-2 sm:gap-3 border border-primary/15 bg-primary/5 px-3 sm:px-4 py-2 sm:py-2.5 text-xs font-semibold uppercase tracking-wider text-primary transition-all duration-300 hover:bg-primary hover:text-on-primary"
 >
-	{icon && <Icon name={icon} class="h-4 w-4" />}
+	{hasIcon && <Icon name={normalizedIcon} class="h-4 w-4 shrink-0" />}
 	<slot />
 </span>

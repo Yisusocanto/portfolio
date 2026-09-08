@@ -1,0 +1,49 @@
+---
+title: "Venezuela Tasas Bot"
+description: "An automated Telegram bot that provides real-time and scheduled Central Bank of Venezuela (BCV) exchange rates (USD, EUR, TRY, RUB). Features daily push notifications at 8:00 AM, on-demand interactive currency menus, and async PostgreSQL subscriber persistence."
+github: "https://github.com/Yisusocanto/venezuela-tasas-bot"
+techs: ["Python", "PostgreSQL", "Telegram", "Docker"]
+imageUrl: "../../assets/venezuela-tasas-bot-1.jpg"
+type: "Automation & Backend"
+year: "2026"
+category: "project"
+isOpenSource: true
+---
+
+import { Image } from "astro:assets"
+import BotMockup from "@/assets/venezuela-tasas-bot-1.jpg"
+
+An automated, asynchronous Telegram bot designed to keep individuals, merchants, and finance teams instantly informed with verified Central Bank of Venezuela (BCV) exchange rates. By consuming the public Venezuela Tasas API, the bot provides instant currency conversions and reliable daily push notifications.
+
+<Image src={BotMockup} alt="Venezuela Tasas Telegram Bot showcase mockup" />
+
+<div id="the-problem">
+## THE PROBLEM
+</div>
+
+In Venezuela's fast-moving economic landscape, official foreign exchange rates published by the Banco Central de Venezuela (BCV) dictate commercial pricing, payroll conversions, and invoicing across both private and corporate sectors.
+
+However, consumers and merchants face persistent friction:
+- **Manual Portal Lookups**: The official central bank portal can experience slow loading times or outages during peak traffic hours when new rates are announced.
+- **Notification Gaps**: Small business owners, accountants, and freelancers must remember to manually check daily rate updates before issuing morning invoices or processing point-of-sale transactions.
+- **Workflow Friction**: Switching between messaging apps and web browsers creates unnecessary overhead during rapid trade operations.
+
+<div id="the-solution">
+## THE SOLUTION
+</div>
+
+I engineered **Venezuela Tasas Bot**, a lightweight yet resilient Telegram bot that acts as an automated financial assistant directly within the chat app:
+
+- **On-Demand Exchange Rates**: Users can trigger `/rates` or `/start` to immediately retrieve live official values for US Dollars (USD), Euros (EUR), Russian Rubles (RUB), and Turkish Liras (TRY).
+- **Scheduled Daily Subscriptions**: A background job queue automatically broadcasts fresh rate updates to all subscribed channels and users every morning at 8:00 AM (Venezuela Time).
+- **Persistent Subscriber Registry**: Subscriptions and user preferences are persisted in a relational database so scheduled jobs and user notification queues survive server restarts without interruption.
+- **Resilient Error Recovery**: Asynchronous polling with exponential backoff ensures that temporary network glitches or upstream API slowdowns do not drop pending messages.
+
+<div id="technical-challenges">
+## TECHNICAL CHALLENGES
+</div>
+
+- **Asynchronous Concurrency & Job Queues**: Built on `python-telegram-bot` with `asyncio`, ensuring non-blocking execution when concurrently broadcasting rate updates to thousands of registered chat IDs simultaneously without hitting Telegram API rate limits.
+- **Async Database Persistence**: Implemented an async database layer using `SQLAlchemy 2.0` and `asyncpg` connected to PostgreSQL, managed with `Alembic` migrations for zero-downtime schema evolution.
+- **Type-Safe Data Modeling**: Leveraged `Pydantic` and `httpx` to strictly validate API payloads received from upstream endpoints before delivering formatted markdown cards to end-users.
+- **Production Containerization**: Multi-stage `Docker` configuration for consistent local development, staging tests, and production deployment with minimal memory footprint.

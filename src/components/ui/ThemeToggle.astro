@@ -1,12 +1,15 @@
 ---
-import Button from "@/components/ui/Button.astro";
 import { Moon, Sun } from "@lucide/astro";
 ---
 
-<Button id="theme-toggle" variant="ghost">
-	<Moon class="dark:hidden" />
-	<Sun class="hidden dark:inline" />
-</Button>
+<button
+	id="theme-toggle"
+	type="button"
+	aria-label="Toggle color theme"
+	class="w-9 h-9 p-0 flex items-center justify-center shrink-0 border border-transparent text-primary hover:bg-primary/10 transition-colors cursor-pointer select-none">
+	<Moon class="w-4 h-4 shrink-0 dark:hidden block" />
+	<Sun class="w-4 h-4 shrink-0 hidden dark:block" />
+</button>
 
 <script>
 	const button = document.getElementById("theme-toggle");
@@ -27,6 +30,12 @@ import { Moon, Sun } from "@lucide/astro";
 	});
 
 	if (localStorage.theme === "dark") {
+		html.classList.remove("light");
+		html.classList.add("dark");
+	} else if (localStorage.theme === "light") {
+		html.classList.remove("dark");
+		html.classList.add("light");
+	} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
 		html.classList.remove("light");
 		html.classList.add("dark");
 	} else {

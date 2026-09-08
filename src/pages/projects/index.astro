@@ -8,10 +8,21 @@ import { getCollection } from "astro:content";
 const allProjects = await getCollection("projects");
 
 const workExperiences = allProjects.filter((p) => p.data.category === "work");
-// Order personal projects: Fialo first (mobile/fullstack flagship), then others
+// Order personal projects: Fialo, Venezuela Tasas Bot, Pixel Reviews, Venezuela Tasas, Smart Link
+const priorityOrder = [
+	"fialo",
+	"venezuela-tasas-bot",
+	"pixel-reviews",
+	"venezuela-tasas",
+	"smart-link",
+];
 const personalProjects = allProjects
 	.filter((p) => p.data.category !== "work")
-	.sort((a, b) => (a.id === "fialo" ? -1 : b.id === "fialo" ? 1 : 0));
+	.sort((a, b) => {
+		const aIdx = priorityOrder.indexOf(a.id);
+		const bIdx = priorityOrder.indexOf(b.id);
+		return (aIdx !== -1 ? aIdx : 99) - (bIdx !== -1 ? bIdx : 99);
+	});
 ---
 
 <Layout

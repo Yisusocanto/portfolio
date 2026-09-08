@@ -13,8 +13,8 @@ const currentPath = Astro.url.pathname;
 ---
 
 <nav
-	class="backdrop-blur-xl bg-surface/90 dark:bg-surface/90 border border-primary/20 shadow-sm px-3 sm:px-4 py-2 h-12 flex items-center justify-between gap-2 sm:gap-4 transition-all duration-300">
-	<div class="flex items-center gap-1 sm:gap-2">
+	class="backdrop-blur-xl bg-surface/90 dark:bg-surface/90 border border-primary/20 shadow-sm px-2.5 sm:px-4 py-1.5 sm:py-2 h-11 sm:h-12 flex items-center justify-between gap-1.5 sm:gap-4 transition-all duration-300">
+	<div class="flex items-center gap-0.5 sm:gap-2">
 		{
 			links.map((link) => {
 				const isActive =
@@ -25,7 +25,7 @@ const currentPath = Astro.url.pathname;
 					<a
 						href={link.href}
 						class:list={[
-							"text-xs sm:text-sm uppercase tracking-wider font-semibold px-2.5 sm:px-3 py-1.5 transition-all duration-200",
+							"text-[11px] sm:text-sm uppercase tracking-wider font-semibold px-2 sm:px-3 py-1 sm:py-1.5 transition-all duration-200",
 							isActive
 								? "bg-primary text-on-primary"
 								: "text-primary hover:bg-primary/10",
@@ -36,7 +36,7 @@ const currentPath = Astro.url.pathname;
 			})
 		}
 	</div>
-	<div class="pl-1 sm:pl-2 border-l border-primary/20 flex items-center">
+	<div class="pl-1 sm:pl-2 border-l border-primary/20 flex items-center shrink-0">
 		<ThemeToggle />
 	</div>
 </nav>
