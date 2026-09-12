@@ -7,9 +7,16 @@ import { getCollection } from "astro:content";
 
 const allProjects = await getCollection("projects");
 
-const workExperiences = allProjects.filter((p) => p.data.category === "work");
-// Order personal projects: Fialo, Venezuela Tasas Bot, Pixel Reviews, Venezuela Tasas, Smart Link
-const priorityOrder = [
+const workPriorityOrder = ["todo-technology", "carniceria-la-parada"];
+const workExperiences = allProjects
+	.filter((p) => p.data.category === "work")
+	.sort((a, b) => {
+		const aIdx = workPriorityOrder.indexOf(a.id);
+		const bIdx = workPriorityOrder.indexOf(b.id);
+		return (aIdx !== -1 ? aIdx : 99) - (bIdx !== -1 ? bIdx : 99);
+	});
+
+const personalPriorityOrder = [
 	"fialo",
 	"venezuela-tasas-bot",
 	"pixel-reviews",
@@ -19,8 +26,8 @@ const priorityOrder = [
 const personalProjects = allProjects
 	.filter((p) => p.data.category !== "work")
 	.sort((a, b) => {
-		const aIdx = priorityOrder.indexOf(a.id);
-		const bIdx = priorityOrder.indexOf(b.id);
+		const aIdx = personalPriorityOrder.indexOf(a.id);
+		const bIdx = personalPriorityOrder.indexOf(b.id);
 		return (aIdx !== -1 ? aIdx : 99) - (bIdx !== -1 ? bIdx : 99);
 	});
 ---
@@ -43,16 +50,20 @@ const personalProjects = allProjects
 
 		<!-- Section 1: Work Experience (Always First) -->
 		<section class="flex flex-col gap-10">
-			<div class="flex flex-col sm:flex-row justify-between sm:items-baseline gap-2">
+			<div
+				class="flex flex-col sm:flex-row justify-between sm:items-baseline gap-2">
 				<div>
-					<span class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono block mb-1">
+					<span
+						class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono block mb-1">
 						01 / Professional Career
 					</span>
-					<h2 class="text-2xl sm:text-4xl font-normal uppercase tracking-tight font-neuehaasdisplay text-primary">
+					<h2
+						class="text-2xl sm:text-4xl font-normal uppercase tracking-tight font-neuehaasdisplay text-primary">
 						Work Experience
 					</h2>
 				</div>
-				<span class="text-xs uppercase font-mono tracking-widest text-primary/60">
+				<span
+					class="text-xs uppercase font-mono tracking-widest text-primary/60">
 					Enterprise & Commercial Production
 				</span>
 			</div>
@@ -81,16 +92,20 @@ const personalProjects = allProjects
 
 		<!-- Section 2: Projects -->
 		<section class="flex flex-col gap-10">
-			<div class="flex flex-col sm:flex-row justify-between sm:items-baseline gap-2">
+			<div
+				class="flex flex-col sm:flex-row justify-between sm:items-baseline gap-2">
 				<div>
-					<span class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono block mb-1">
+					<span
+						class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono block mb-1">
 						02 / Software & Mobile Apps
 					</span>
-					<h2 class="text-2xl sm:text-4xl font-normal uppercase tracking-tight font-neuehaasdisplay text-primary">
+					<h2
+						class="text-2xl sm:text-4xl font-normal uppercase tracking-tight font-neuehaasdisplay text-primary">
 						Projects
 					</h2>
 				</div>
-				<span class="text-xs uppercase font-mono tracking-widest text-primary/60">
+				<span
+					class="text-xs uppercase font-mono tracking-widest text-primary/60">
 					Personal & Open Source ({personalProjects.length})
 				</span>
 			</div>
@@ -118,20 +133,20 @@ const personalProjects = allProjects
 		<Separator />
 
 		<div class="flex flex-col items-center gap-6 text-center py-12">
-			<span class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono">
+			<span
+				class="text-xs uppercase tracking-[0.25em] text-primary/60 font-mono">
 				Have an idea in mind?
 			</span>
 			<h4
 				class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-tighter leading-none font-neuehaasdisplay text-primary">
 				Let's work together
 			</h4>
-			<p class="max-w-md text-secondary/80 font-light text-base leading-relaxed">
-				I am currently open to exciting freelance opportunities, contracts, and full-time roles.
+			<p
+				class="max-w-md text-secondary/80 font-light text-base leading-relaxed">
+				I am currently open to exciting freelance opportunities, contracts, and
+				full-time roles.
 			</p>
-			<Button
-				href="/contact"
-				variant="primary"
-				class="px-8 py-4 mt-2">
+			<Button href="/contact" variant="primary" class="px-8 py-4 mt-2">
 				Start a Conversation →
 			</Button>
 		</div>

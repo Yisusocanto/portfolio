@@ -1,0 +1,61 @@
+---
+title: "La Parada - Carnicería & Lácteos"
+description: "A comprehensive enterprise ERP and production management system built for a commercial butchery and dairy processing facility. Manages daily raw milk reception, recipe-driven batch production, lot-level inventory, multi-currency sales, and credit ledgers."
+type: "Work Experience • Full Stack"
+imageUrl: "../../assets/carniceria-la-parada-1.png"
+year: "2026"
+category: "work"
+isOpenSource: false
+techs: ["Next js", "FastAPI", "Postgresql", "React", "Tailwindcss", "TypeScript"]
+---
+
+import { Image } from "astro:assets"
+import LaParadaDashboard from "@/assets/carniceria-la-parada-1.png"
+import LaParadaInventario from "@/assets/carniceria-la-parada-2.png"
+import LaParadaProveedores from "@/assets/carniceria-la-parada-3.png"
+import LaParadaVentas from "@/assets/carniceria-la-parada-4.png"
+
+A specialized enterprise resource planning (ERP) platform developed to digitize and automate the entire operational lifecycle of a commercial butchery and artisanal dairy processing company. The platform unifies supplier procurement, chemical and raw milk intake, batch manufacturing, real-time inventory lot tracking, and multi-currency point of sale.
+
+<Image src={LaParadaDashboard} alt="La Parada Executive Dashboard" />
+
+<div id="the-problem">
+## THE PROBLEM
+</div>
+
+Commercial butchery and dairy processing facilities manage perishable goods with volatile manufacturing conversions. Unlike standard retail, a dairy plant receives raw milk in volume (liters) and chemical additives, which undergo physical transformation into multiple output categories (hard cheese, semi-hard cheese, whey) with variable yield ratios.
+
+Prior to the platform, the company relied on paper manifests and disconnected spreadsheets, creating major operational vulnerabilities:
+- **Production Yield Blindness**: Inability to accurately calculate real-time transformation yields (liters of milk consumed per kilogram of finished cheese), obscuring true manufacturing costs.
+- **Untracked Batch Expirations**: Difficulties tracking inventory by specific production batch (lote), leading to rotation errors and spoiled product risk.
+- **Bi-Monetary Currency Friction**: Operating in an economy with dual currencies (USD and Venezuelan Bolívares) required constant manual exchange rate conversions during checkout, increasing cashier error rates.
+- **Supplier Credit Fragmentation**: Lack of a centralized ledger to correlate incoming milk tank deliveries with outstanding supplier accounts payable and partial payments.
+
+<Image src={LaParadaInventario} alt="La Parada Lot-Level Inventory Matrix" />
+
+<div id="the-solution">
+## THE SOLUTION
+</div>
+
+I engineered a modular web application powered by a high-performance FastAPI backend and a modern Next.js dashboard that connects all departments:
+
+- **Procurement & Intake Verification**: Dedicated intake forms to record raw milk tank arrivals, test readings, and chemical inputs, automatically generating corresponding supplier debts.
+- **Recipe & Batch Production Engine**: Allows master cheesemakers to record production batches, log raw material consumption, and register finished goods with automatic yield calculation (e.g. 0.98 L/Kg).
+- **Lot-Level Inventory Tracking**: An interactive inventory matrix detailing exact availability by product, unit format (blocks, wheels, bags), production date, and batch cost.
+- **Dual-Currency Commercial Sales Point**: Cashiers can issue itemized sales by weight (Kg) or pre-packaged units, calculating subtotals dynamically in both USD and Bolívares using real-time exchange rates.
+- **Supplier & Customer Credit Ledger**: Complete receivables and payables module tracking debt issuance, partial installments (abonos), and outstanding balance summaries.
+
+<Image src={LaParadaVentas} alt="La Parada Multi-Currency Sales Breakdown" />
+
+<div id="technical-challenges">
+## TECHNICAL CHALLENGES
+</div>
+
+Developing an industrial management platform required addressing strict business logic and data consistency requirements:
+
+- **Dynamic Batch Transformation Modeling**: Designed a relational database schema in PostgreSQL with SQLModel that models raw material intake, multi-product production batches, and finished inventory lots without data redundancy, ensuring strict traceability from raw milk delivery to retail customer sale.
+- **Bi-Monetary Transactional Integrity**: Implemented immutable currency transaction records. Exchange rates are snapshotted at the exact timestamp of each transaction, guaranteeing historical financial reporting remains mathematically accurate regardless of future inflation or currency fluctuations.
+- **FastAPI Modular Service Architecture**: Structured the backend using clean repository and service layers with dependency injection, separating complex business calculations (yield ratios, stock decrement, credit settlement) from HTTP routing.
+- **Responsive Industrial UI**: Built an intuitive, accessible dashboard using Next.js, TanStack Table, and Tailwind CSS, optimized with dark mode for high-contrast viewing on touch terminals across factory floor and sales counter environments.
+
+<Image src={LaParadaProveedores} alt="La Parada Supplier Debt and Accounts Ledger" />

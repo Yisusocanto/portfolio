@@ -92,30 +92,40 @@ const { Content } = await render(project);
 						</div>
 					</div>
 
-					<div class="flex gap-4 items-center">
-						{
-							project.data.github && (
-								<Button
-									href={project.data.github}
-									target="_blank"
-									class="flex-1"
-									variant="primary">
-									GitHub Repo
-								</Button>
-							)
-						}
-						{
-							project.data.live && (
-								<Button
-									href={project.data.live}
-									target="_blank"
-									class="flex-1"
-									variant="outline">
-									Live Site
-								</Button>
-							)
-						}
-					</div>
+					{
+						(project.data.github || project.data.live) ? (
+							<div class="flex gap-4 items-center">
+								{
+									project.data.github && (
+										<Button
+											href={project.data.github}
+											target="_blank"
+											class="flex-1"
+											variant="primary">
+											GitHub Repo
+										</Button>
+									)
+								}
+								{
+									project.data.live && (
+										<Button
+											href={project.data.live}
+											target="_blank"
+											class="flex-1"
+											variant="outline">
+											Live Site
+										</Button>
+									)
+								}
+							</div>
+						) : (
+							<div class="border border-primary/20 bg-primary/5 px-4 py-3 text-center">
+								<span class="text-xs uppercase tracking-widest font-mono text-primary/70 font-semibold block">
+									Internal Enterprise System • Private Codebase
+								</span>
+							</div>
+						)
+					}
 				</div>
 			</div>
 		</header>

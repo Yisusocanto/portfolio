@@ -5,7 +5,6 @@ import Button from "@/components/ui/Button.astro";
 import { getCollection } from "astro:content";
 
 const allProjects = await getCollection("projects");
-// Order personal projects: Fialo, Venezuela Tasas Bot, Pixel Reviews, Venezuela Tasas, Smart Link
 const priorityOrder = [
 	"fialo",
 	"venezuela-tasas-bot",
@@ -64,10 +63,7 @@ const featuredProjects = personalProjects.slice(0, 4);
 	</div>
 
 	<div class="flex justify-center mt-16 sm:mt-24">
-		<Button
-			href="/projects"
-			variant="primary"
-			class="px-8 py-4">
+		<Button href="/projects" variant="primary" class="px-8 py-4">
 			Explore All Works ({allProjects.length}) →
 		</Button>
 	</div>
